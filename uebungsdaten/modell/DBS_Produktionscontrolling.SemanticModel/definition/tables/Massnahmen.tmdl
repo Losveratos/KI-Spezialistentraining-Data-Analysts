@@ -1,0 +1,117 @@
+table Massnahmen
+	lineageTag: 7ba7cdd0-327c-53d1-82ca-64a35379fe99
+
+	column MassnahmeID
+		dataType: string
+		lineageTag: 42f7cb80-00f7-5133-b323-c52826d87810
+		summarizeBy: none
+		sourceColumn: MassnahmeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Titel
+		dataType: string
+		lineageTag: 9749db2c-1401-5fd6-bf59-c7b5262444cd
+		summarizeBy: none
+		sourceColumn: Titel
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 23336d69-dacc-5f1b-8293-a11dbce6c314
+		summarizeBy: sum
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeistungsartID
+		dataType: int64
+		formatString: 0
+		lineageTag: f05c6f72-356f-5eea-98e2-46aff7df2b53
+		summarizeBy: sum
+		sourceColumn: LeistungsartID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Verantwortlich
+		dataType: string
+		lineageTag: 60bf094c-73cd-5774-9c57-bb0ea76de8d3
+		summarizeBy: none
+		sourceColumn: Verantwortlich
+
+		annotation SummarizationSetBy = Automatic
+
+	column Start
+		dataType: dateTime
+		formatString: dd.MM.yyyy
+		lineageTag: 06dea808-ffd4-5e83-bd59-ed89be89e453
+		summarizeBy: none
+		sourceColumn: Start
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Zieltermin
+		dataType: dateTime
+		formatString: dd.MM.yyyy
+		lineageTag: 80194485-32b9-5d71-bc50-b5543c393130
+		summarizeBy: none
+		sourceColumn: Zieltermin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Status
+		dataType: string
+		lineageTag: 4bddaa88-2eba-5585-969e-4502c5fdb42e
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fortschritt
+		dataType: double
+		formatString: 0 %
+		lineageTag: 83a36157-d690-5d0f-9811-85d8ec9e8950
+		summarizeBy: none
+		sourceColumn: Fortschritt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Einsparung_Plan
+		dataType: double
+		lineageTag: deeacb72-32fd-55d0-8ccc-297e7074460b
+		summarizeBy: sum
+		sourceColumn: Einsparung_Plan
+
+		annotation SummarizationSetBy = Automatic
+
+	column Einsparung_Ist
+		dataType: double
+		lineageTag: 3f88a1d5-a1eb-54b0-8b42-2bebbe25ac7f
+		summarizeBy: sum
+		sourceColumn: Einsparung_Ist
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kommentar
+		dataType: string
+		lineageTag: fb71ac51-3b1f-5f9b-ba1a-b07aa0ddf3be
+		summarizeBy: none
+		sourceColumn: Kommentar
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Massnahmen = m
+		mode: import
+		source =
+				let
+				    Quelle = Daten_Massnahmen
+				in
+				    Quelle
+
+	annotation PBI_ResultType = Table

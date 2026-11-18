@@ -1,0 +1,26 @@
+﻿MassnahmeID;Titel;Region;Leistungsart;Verantwortlich;Start;Zieltermin;Status;Fortschritt;Einsparung_Plan;Einsparung_Ist;Kommentar
+M-001;Digitale Leistungsnachweise Bahnhofsreinigung;Nord;Bahnhofsreinigung;Teamleitung Bahnhofsreinigung Nord;01.02.2025;30.09.2025;abgeschlossen;1,0;45000;41000;Rollout in allen Bahnhöfen abgeschlossen
+M-002;Schichtplanoptimierung Sicherheitsdienst West;West;Sicherheitsdienst;Bereichsleitung Sicherheit West;01.03.2025;31.12.2025;abgeschlossen;1,0;60000;52000;Wirkung etwas unter Plan
+M-003;Energiecontrolling Liegenschaften Mitte;Mitte;Facility Management;Objektleitung Facility Mitte;01.04.2025;31.03.2026;abgeschlossen;1,0;30000;31500;
+M-004;Tourenoptimierung Fahrzeugreinigung Süd;Süd;Fahrzeugreinigung;Teamleitung Fahrzeugreinigung Süd;01.10.2025;30.04.2026;abgeschlossen;1,0;220000;291000;Neue Tourenplanung seit Mai im Regelbetrieb
+M-005;Krankenstandsanalyse und Gesundheitsmanagement Ost;Ost;Bahnhofsreinigung;Personalleitung Ost;15.08.2026;31.12.2026;in Umsetzung;0,3;80000;5000;Rückkehrgespräche eingeführt
+M-006;Springerpool Fahrzeugreinigung Ost;Ost;Fahrzeugreinigung;Teamleitung Fahrzeugreinigung Ost;01.09.2026;30.11.2026;verzögert;0,2;95000;0;Rekrutierung schwierig
+M-007;Rahmenvertrag Reinigungsmittel;Südost;Bahnhofsreinigung;Einkauf Reinigung Südost;01.05.2025;31.12.2025;abgeschlossen;0,6;25000;14000;Vertrag unterschrieben
+M-008;Bereitschaftsmodell Winterdienst;Nord;Winterdienst;Bereichsleitung Facility Nord;01.06.2025;30.11.2025;abgeschlossen;1,0;40000;38000;Bereitschaftspauschale statt Überstunden
+M-009;Sensorbasierte Reinigungsintervalle;West;Bahnhofsreinigung;Teamleitung Bahnhofsreinigung West;15.01.2026;31.12.2026;in Umsetzung;0,55;70000;22000;Pilot an drei Bahnhöfen läuft
+M-010;Videoanalyse für Streifenplanung;Südwest;Sicherheitsdienst;Bereichsleitung Sicherheit Südwest;01.03.2026;31.10.2026;verzögert;0,4;50000;0;Datenschutzprüfung offen
+M-011;Wartungsverträge bündeln;Süd;Facility Management;Objektleitung Facility Süd;01.02.2026;30.09.2026;abgeschlossen;1,0;35000;33000;
+M-012;Mobile Auftragsabwicklung Facility;Südost;Facility Management;Objektleitung Facility Südost;01.11.2025;30.06.2026;in Umsetzung;0,7;45000;12000;Schnittstelle zu SAP PM in Arbeit
+M-013;Qualitätsaudits Fahrzeugreinigung Ost;Ost;Fahrzeugreinigung;Qualitätsmanagement Ost;15.09.2026;15.12.2026;offen;0,0;20000;0;
+M-014;Zentraler Streumitteleinkauf;Mitte;Winterdienst;Einkauf Facility Mitte;01.08.2025;30.11.2025;abgeschlossen;1,0;18000;17500;
+M-015;Personaleinsatzplanung Bahnhofsreinigung Ost;Ost;Bahnhofsreinigung;Teamleitung Bahnhofsreinigung Ost;01.10.2026;31.03.2027;offen;0,0;60000;0;Start nach Budgetfreigabe
+M-016;Schulung Deeskalation;Nord;Sicherheitsdienst;Bereichsleitung Sicherheit Nord;01.04.2026;31.12.2026;in Umsetzung;0,5;15000;4000;
+M-017;LED-Umrüstung Betriebshöfe;West;Facility Management;Objektleitung Facility West;01.09.2025;31.08.2026;abgeschlossen;1,0;55000;49000;Restarbeiten erledigt
+M-018;Wasserrecycling Waschanlage;Südwest;Fahrzeugreinigung;Teamleitung Fahrzeugreinigung Südwest;01.05.2026;30.04.2027;in Umsetzung;0,35;40000;6000;
+M-019;Revierzusammenlegung Sicherheitsdienst;Süd;Sicherheitsdienst;Bereichsleitung Sicherheit Süd;01.07.2025;31.01.2026;abgeschlossen;1,0;30000;68000;Deutlich über Plan
+M-020;GPS-Routenplanung Winterdienst;Südost;Winterdienst;Bereichsleitung Facility Südost;01.07.2026;30.11.2026;in Umsetzung;0,6;25000;0;Wirkung erst in der Wintersaison messbar
+M-021;Reinigungsroboter Bahnhofshallen;Mitte;Bahnhofsreinigung;Teamleitung Bahnhofsreinigung Mitte;01.06.2026;31.05.2027;offen;0,0;65000;0;
+M-022;Vergabe Glasreinigung an Nachunternehmer;Nord;Facility Management;Objektleitung Facility Nord;01.01.2026;31.07.2026;verzögert;0,5;28000;3000;Ausschreibung neu aufgesetzt
+M-023;Überstundenabbau Sicherheitsdienst Ost;Ost;Sicherheitsdienst;Bereichsleitung Sicherheit Ost;01.09.2026;31.12.2026;in Umsetzung;0,15;35000;0;
+M-024;Standardisierung Leistungsverzeichnisse;West;Fahrzeugreinigung;Teamleitung Fahrzeugreinigung West;15.01.2025;30.06.2025;abgeschlossen;1,0;20000;21000;
+M-025;Pausenraumkonzept und Mitarbeiterbindung;Südwest;Bahnhofsreinigung;Personalleitung Südwest;01.02.2026;31.12.2026;in Umsetzung;0,45;10000;2000;

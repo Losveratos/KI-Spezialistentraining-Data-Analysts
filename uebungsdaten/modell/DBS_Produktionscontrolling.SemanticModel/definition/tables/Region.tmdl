@@ -1,0 +1,40 @@
+table Region
+	lineageTag: 062cbb13-cfce-5b8f-b525-068d35d6620d
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 594e58ac-aefe-5fcf-8d50-817d8a671128
+		summarizeBy: sum
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 545a6e23-7db9-5840-8707-87a989bb1cf5
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Region = m
+		mode: import
+		source =
+				let
+				    Quelle = #table(
+				        type table [RegionID = Int64.Type, Region = text],
+				        {
+				            {1, "Nord"},
+				            {2, "Ost"},
+				            {3, "Südost"},
+				            {4, "Süd"},
+				            {5, "Südwest"},
+				            {6, "Mitte"},
+				            {7, "West"}
+				        }
+				    )
+				in
+				    Quelle
+
+	annotation PBI_ResultType = Table

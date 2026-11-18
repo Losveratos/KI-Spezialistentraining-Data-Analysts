@@ -1,0 +1,5 @@
+# Power BI Desktop: lokale Einstellungen und Daten-Cache
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix.bak
+~$*

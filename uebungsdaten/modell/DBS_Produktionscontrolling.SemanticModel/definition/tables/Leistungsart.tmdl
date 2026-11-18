@@ -1,0 +1,46 @@
+table Leistungsart
+	lineageTag: c57f8400-feb1-599c-87b0-48af53d01844
+
+	column LeistungsartID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f98d6d0-3a6f-5c5c-a9fd-6d648737805e
+		summarizeBy: sum
+		sourceColumn: LeistungsartID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Leistungsart
+		dataType: string
+		lineageTag: 3c1d7d0d-dde5-50df-8d0f-0134f5c924a2
+		summarizeBy: none
+		sourceColumn: Leistungsart
+
+		annotation SummarizationSetBy = Automatic
+
+	column Geschaeftsfeld
+		dataType: string
+		lineageTag: b7f4311c-7462-5af0-81a9-6758eff27724
+		summarizeBy: none
+		sourceColumn: Geschaeftsfeld
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Leistungsart = m
+		mode: import
+		source =
+				let
+				    Quelle = #table(
+				        type table [LeistungsartID = Int64.Type, Leistungsart = text, Geschaeftsfeld = text],
+				        {
+				            {1, "Fahrzeugreinigung", "Reinigung"},
+				            {2, "Bahnhofsreinigung", "Reinigung"},
+				            {3, "Sicherheitsdienst", "Sicherheit"},
+				            {4, "Facility Management", "Facility"},
+				            {5, "Winterdienst", "Facility"}
+				        }
+				    )
+				in
+				    Quelle
+
+	annotation PBI_ResultType = Table

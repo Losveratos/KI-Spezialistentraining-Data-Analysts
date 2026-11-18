@@ -1,0 +1,238 @@
+// =====================================================================================
+// INFO_Abfragen.dax – DAX-Abfragen für Modul 1 (Übungsmodell DBS_Produktionscontrolling)
+//
+// Nutzung: Power BI Desktop › DAX-Abfrageansicht › neue Registerkarte › Inhalt einfügen.
+// Immer EINE Abfrage markieren (von "// Abfrage …" bis vor die nächste) und "Ausführen"
+// bzw. F5. Abfragen mit DEFINE (7 und 8) nur komplett ab DEFINE markieren.
+// Alles auf einmal auszuführen scheitert, weil mehrere DEFINE-Blöcke in einer Ausführung
+// nicht erlaubt sind. Alternative: jede Abfrage in eine eigene Registerkarte kopieren.
+// Ergebnisraster › "Kopieren" kopiert die Tabelle mit Überschriften für Copilot.
+//
+// INFO.VIEW-Funktionen lesen die Metadaten des geöffneten Modells. Die Spalte [Expression]
+// ist nur gefüllt, wenn Sie Schreibrechte auf das Modell haben (lokal in Desktop: ja;
+// bei Liveverbindung zu einem veröffentlichten Modell: nein).
+//
+// Hinweis: Haben Sie m_QQ bereits umbenannt (Ü1.11), ersetzen Sie in Abfrage 8 und 9 [m_QQ]
+// durch den neuen Namen. Desktop passt Verweise im Modell an, nicht aber Abfragetexte.
+// =====================================================================================
+
+
+// Abfrage 1 – Tabellen
+EVALUATE
+SELECTCOLUMNS (
+    INFO.VIEW.TABLES (),
+    "Tabelle", [Name],
+    "Beschreibung", [Description],
+    "Ausgeblendet", [IsHidden],
+    "Speichermodus", [StorageMode],
+    "Datenkategorie", [DataCategory]
+)
+ORDER BY [Tabelle]
+
+
+// Abfrage 2 – Spalten (ohne interne RowNumber-Spalten)
+EVALUATE
+SELECTCOLUMNS (
+    FILTER ( INFO.VIEW.COLUMNS (), [DataCategory] <> "RowNumber" ),
+    "Tabelle", [Table],
+    "Spalte", [Name],
+    "Datentyp", [DataType],
+    "Beschreibung", [Description],
+    "Ausgeblendet", [IsHidden],
+    "Zusammenfassen nach", [SummarizeBy],
+    "Sortieren nach", [SortByColumn],
+    "Formatstring", [FormatString],
+    "Ist Schlüssel", [IsKey],
+    "Anzeigeordner", [DisplayFolder]
+)
+ORDER BY [Tabelle], [Spalte]
+
+
+// Abfrage 3 – Measures mit DAX-Ausdruck
+EVALUATE
+SELECTCOLUMNS (
+    INFO.VIEW.MEASURES (),
+    "Tabelle", [Table],
+    "Measure", [Name],
+    "Beschreibung", [Description],
+    "DAX", [Expression],
+    "Formatstring", [FormatString],
+    "Anzeigeordner", [DisplayFolder],
+    "Status", [State]
+)
+ORDER BY [Measure]
+
+
+// Abfrage 4 – Beziehungen
+EVALUATE
+SELECTCOLUMNS (
+    INFO.VIEW.RELATIONSHIPS (),
+    "Beziehung", [Relationship],
+    "Von Tabelle", [FromTable],
+    "Von Spalte", [FromColumn],
+    "Von Kardinalität", [FromCardinality],
+    "Nach Tabelle", [ToTable],
+    "Nach Spalte", [ToColumn],
+    "Nach Kardinalität", [ToCardinality],
+    "Filterrichtung", [CrossFilteringBehavior],
+    "Aktiv", [IsActive]
+)
+ORDER BY [Von Tabelle], [Nach Tabelle]
+
+
+// Abfrage 5 – Hinweisliste "KI-Fähigkeit": Objekte ohne Beschreibung
+// (Hinweisliste, keine vollständige Prüfung – Ergebnis mit dem TMDL abgleichen)
+EVALUATE
+UNION (
+    SELECTCOLUMNS (
+        FILTER ( INFO.VIEW.MEASURES (), LEN ( [Description] ) = 0 ),
+        "Objektart", "Measure",
+        "Tabelle", [Table],
+        "Name", [Name],
+        "Ausgeblendet", [IsHidden]
+    ),
+    SELECTCOLUMNS (
+        FILTER (
+            INFO.VIEW.COLUMNS (),
+            [DataCategory] <> "RowNumber" && LEN ( [Description] ) = 0
+        ),
+        "Objektart", "Spalte",
+        "Tabelle", [Table],
+        "Name", [Name],
+        "Ausgeblendet", [IsHidden]
+    )
+)
+ORDER BY [Objektart], [Tabelle], [Name]
+
+
+// Abfrage 6 – Hinweisliste Modellhygiene (Schwächen F1, F3, F6, F7, F8)
+// Jede Zeile ist ein Verdacht, kein Urteil.
+EVALUATE
+UNION (
+    // F6: sichtbare ID-Spalten, die summiert werden
+    SELECTCOLUMNS (
+        FILTER (
+            INFO.VIEW.COLUMNS (),
+            CONTAINSSTRING ( [Name], "ID" )
+                && NOT CONTAINSSTRING ( [SummarizeBy], "None" )
+        ),
+        "Verdacht", "ID-Spalte wird aggregiert",
+        "Objekt", [Table] & "[" & [Name] & "]",
+        "Detail", "SummarizeBy = " & [SummarizeBy] & ", ausgeblendet = " & [IsHidden]
+    ),
+    // F7: Monatsnamen ohne Sortierspalte
+    SELECTCOLUMNS (
+        FILTER (
+            INFO.VIEW.COLUMNS (),
+            CONTAINSSTRING ( [Name], "Monatsname" ) && LEN ( [SortByColumn] ) = 0
+        ),
+        "Verdacht", "Textspalte ohne Sortierspalte",
+        "Objekt", [Table] & "[" & [Name] & "]",
+        "Detail", "Monate werden alphabetisch sortiert"
+    ),
+    // F8: keine Tabelle als Datumstabelle markiert
+    FILTER (
+        ROW (
+            "Verdacht", "Keine Datumstabelle markiert",
+            "Objekt", "Modell",
+            "Detail", "Anzahl Tabellen mit Datenkategorie Time: "
+                & COUNTROWS ( FILTER ( INFO.VIEW.TABLES (), [DataCategory] = "Time" ) ) + 0
+        ),
+        COUNTROWS ( FILTER ( INFO.VIEW.TABLES (), [DataCategory] = "Time" ) ) + 0 = 0
+    ),
+    // F1: Division mit "/" statt DIVIDE (grobe Textsuche, findet auch "/" in Kommentaren)
+    SELECTCOLUMNS (
+        FILTER ( INFO.VIEW.MEASURES (), CONTAINSSTRING ( [Expression], "/" ) ),
+        "Verdacht", "Division mit / statt DIVIDE",
+        "Objekt", "[" & [Name] & "]",
+        "Detail", [Expression]
+    ),
+    // F3: Zeitintelligenz auf einer Spalte der Faktentabelle
+    SELECTCOLUMNS (
+        FILTER (
+            INFO.VIEW.MEASURES (),
+            ( CONTAINSSTRING ( [Expression], "YTD" )
+                || CONTAINSSTRING ( [Expression], "SAMEPERIODLASTYEAR" )
+                || CONTAINSSTRING ( [Expression], "DATEADD" ) )
+                && CONTAINSSTRING ( [Expression], "Fakt_" )
+        ),
+        "Verdacht", "Zeitintelligenz evtl. nicht über Kalender",
+        "Objekt", "[" & [Name] & "]",
+        "Detail", [Expression]
+    )
+)
+
+
+// Abfrage 7 – Kosten YTD: bisherige Fassung (Fakt_Leistung[Monat], F3)
+//              gegen korrigierte Fassung (Kalender[Datum]) für 2026
+DEFINE
+    MEASURE Fakt_Leistung[Kosten YTD neu] =
+        TOTALYTD ( [Ist Kosten], Kalender[Datum] )
+
+EVALUATE
+SUMMARIZECOLUMNS (
+    Kalender[Monat],
+    TREATAS ( { 2026 }, Kalender[Jahr] ),
+    "Ist Kosten", [Ist Kosten],
+    "Kosten YTD bisher", [Kosten YTD],
+    "Kosten YTD neu", [Kosten YTD neu]
+)
+ORDER BY Kalender[Monat]
+
+
+// Abfrage 8 – KPI Status Text: alte gegen refaktorisierte Fassung je Region und Monat
+// Erwartung: Abfrage 8a liefert 0 Abweichungen. Abfrage 8b zeigt alle Zeilen nebeneinander.
+// EXACT statt "=" bzw. "<>", weil Textvergleiche in DAX Groß-/Kleinschreibung ignorieren.
+DEFINE
+    MEASURE Fakt_Leistung[KPI Status Text NEU] =
+        // Ampelstatus für die Kennzahlenübersicht (Definition siehe Kennzahlen-Glossar K05)
+        VAR _SchwelleKosten = 0.05       // mehr als 5 % über Plan = Kostenüberschreitung
+        VAR _SchwelleQualitaet = 0.90    // weniger als 90 % bestandene Prüfungen = Qualitätsproblem
+        VAR _SchwelleKrankenquote = 0.08 // mehr als 8 % Krankenquote = beobachten
+        VAR _KostenUeberPlan = [Abw Kosten %] > _SchwelleKosten
+        VAR _QualitaetKritisch = [m_QQ] < _SchwelleQualitaet
+        VAR _KrankenquoteHoch = [Krankenquote] > _SchwelleKrankenquote
+        // Massnahmen hat keine Beziehung zum Kalender: zählt verzögerte Maßnahmen der Region/Leistungsart
+        VAR _MassnahmenVerzoegert =
+            CALCULATE ( COUNTROWS ( Massnahmen ), Massnahmen[Status] = "verzögert" )
+        RETURN
+            SWITCH (
+                TRUE (),
+                _KostenUeberPlan && _QualitaetKritisch, "kritisch",
+                _KostenUeberPlan || _QualitaetKritisch || _KrankenquoteHoch, "beobachten",
+                _MassnahmenVerzoegert > 0, "Maßnahme verzögert",
+                "im Plan"
+            )
+
+    VAR _Vergleich =
+        SUMMARIZECOLUMNS (
+            Region[Region],
+            Kalender[Monat],
+            "Alt", [KPI Status Text],
+            "Neu", [KPI Status Text NEU]
+        )
+
+// Abfrage 8a – Zusammenfassung
+EVALUATE
+ROW (
+    "Zeilen verglichen", COUNTROWS ( _Vergleich ),
+    "Abweichungen", COUNTROWS ( FILTER ( _Vergleich, NOT EXACT ( [Alt], [Neu] ) ) ) + 0
+)
+
+// Abfrage 8b – alle Zeilen nebeneinander, Abweichungen zuerst
+EVALUATE
+ADDCOLUMNS ( _Vergleich, "Gleich", EXACT ( [Alt], [Neu] ) )
+ORDER BY [Gleich], Region[Region], Kalender[Monat]
+
+
+// Abfrage 9 – Verteilung der Statuswerte (Plausibilität, z. B. für Oktober 2026)
+EVALUATE
+SUMMARIZECOLUMNS (
+    Region[Region],
+    TREATAS ( { "2026-10" }, Kalender[Monat] ),
+    "KPI Status Text", [KPI Status Text],
+    "Abw Kosten %", [Abw Kosten %],
+    "m_QQ", [m_QQ],
+    "Krankenquote", [Krankenquote]
+)
+ORDER BY Region[Region]

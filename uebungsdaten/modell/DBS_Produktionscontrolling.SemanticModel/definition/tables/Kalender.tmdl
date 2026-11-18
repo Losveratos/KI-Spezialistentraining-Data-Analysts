@@ -1,0 +1,73 @@
+table Kalender
+	lineageTag: 361b6513-0e9a-56e4-9817-7bd3e0a441b7
+
+	column Datum
+		dataType: dateTime
+		formatString: dd.MM.yyyy
+		lineageTag: 522baf4b-dd82-5886-9ec9-357e9fb56e05
+		summarizeBy: none
+		sourceColumn: Datum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Jahr
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bcd8e66-f85f-5861-8bfc-9aa8f040f827
+		summarizeBy: none
+		sourceColumn: Jahr
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonatNr
+		dataType: int64
+		formatString: 0
+		lineageTag: c1a5a9a5-cc55-5891-947e-6f3038703141
+		summarizeBy: none
+		sourceColumn: MonatNr
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monat
+		dataType: string
+		lineageTag: fede0c06-e8eb-582d-bf6e-d4b0b59ef44f
+		summarizeBy: none
+		sourceColumn: Monat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monatsname
+		dataType: string
+		lineageTag: b12467e3-ad61-523f-84f7-8e0069630276
+		summarizeBy: none
+		sourceColumn: Monatsname
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quartal
+		dataType: string
+		lineageTag: 5845b5a2-7196-5aee-8d61-85bbb8972699
+		summarizeBy: none
+		sourceColumn: Quartal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Kalender = m
+		mode: import
+		source =
+				let
+				    Start = #date(2025, 1, 1),
+				    Ende = #date(2026, 12, 31),
+				    Tage = List.Dates(Start, Duration.Days(Ende - Start) + 1, #duration(1, 0, 0, 0)),
+				    Tabelle = Table.FromList(Tage, Splitter.SplitByNothing(), type table [Datum = date]),
+				    Jahr = Table.AddColumn(Tabelle, "Jahr", each Date.Year([Datum]), Int64.Type),
+				    MonatNr = Table.AddColumn(Jahr, "MonatNr", each Date.Month([Datum]), Int64.Type),
+				    Monat = Table.AddColumn(MonatNr, "Monat", each Text.From([Jahr]) & "-" & Text.PadStart(Text.From([MonatNr]), 2, "0"), type text),
+				    Monatsname = Table.AddColumn(Monat, "Monatsname", each Date.MonthName([Datum], "de-DE"), type text),
+				    Quartal = Table.AddColumn(Monatsname, "Quartal", each "Q" & Text.From(Date.QuarterOfYear([Datum])), type text)
+				in
+				    Quartal
+
+	annotation PBI_ResultType = Table

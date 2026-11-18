@@ -1,0 +1,213 @@
+table Fakt_Leistung
+	lineageTag: 1aa228f2-5aa4-5ea9-9007-abc7b5c72554
+
+	measure 'Ist Kosten' = SUM ( Fakt_Leistung[Ist_Kosten] )
+		formatString: #,0 €
+		lineageTag: 48a884d4-cc7d-5c02-a8cb-6b412117efdd
+
+	measure 'Plan Kosten' = SUM ( Fakt_Leistung[Plan_Kosten] )
+		formatString: #,0 €
+		lineageTag: ceb26c5e-29bd-5ea1-810a-7fa160aa6d85
+
+	measure 'Abw Kosten' = [Ist Kosten] - [Plan Kosten]
+		formatString: #,0 €
+		lineageTag: 9650a378-9219-5134-b28c-025c3c21ccee
+
+	measure 'Abw Kosten %' = ( [Ist Kosten] - [Plan Kosten] ) / [Plan Kosten]
+		formatString: 0.0 %
+		lineageTag: aa7712dd-5f2b-5c8a-b282-5e3a3bae2831
+
+	measure 'Ist Stunden' = SUM ( Fakt_Leistung[Ist_Stunden] )
+		formatString: #,0
+		lineageTag: 3a852af0-985d-5047-8e45-046fb45d840e
+
+	measure 'Plan Stunden' = SUM ( Fakt_Leistung[Plan_Stunden] )
+		formatString: #,0
+		lineageTag: d54ddf4c-70e7-56ce-847f-41c16ee053ad
+
+	measure 'Kosten je Stunde' = DIVIDE ( [Ist Kosten], [Ist Stunden] )
+		formatString: #,0 €
+		lineageTag: 56ed86b5-0b4d-5e66-8880-d694e0487aa2
+
+	measure Produktivitaet = DIVIDE ( SUM ( Fakt_Leistung[Leistungseinheiten] ), [Ist Stunden] )
+		formatString: 0.00
+		lineageTag: 820735a3-80bf-5f9e-9775-b81be06b79a6
+
+	measure m_QQ = DIVIDE ( SUM ( Fakt_Leistung[Qualitaet_Bestanden] ), SUM ( Fakt_Leistung[Qualitaet_Pruefungen] ) )
+		formatString: 0.0 %
+		lineageTag: 6c47485c-8972-52a6-9227-157889c4ffb8
+
+	measure Krankenquote = SUM ( Fakt_Leistung[Krankheitstage] ) / SUM ( Fakt_Leistung[Sollarbeitstage] )
+		formatString: 0.0 %
+		lineageTag: d151221e-4d1b-5319-a5b2-ab5cecc0621a
+
+	measure Ueberstundenquote = DIVIDE ( SUM ( Fakt_Leistung[Ueberstunden] ), [Ist Stunden] )
+		formatString: 0.0 %
+		lineageTag: 22e8ee97-4b11-54cb-8343-6e10b637f24f
+
+	measure 'Ist Kosten VJ' = CALCULATE ( [Ist Kosten], SAMEPERIODLASTYEAR ( Kalender[Datum] ) )
+		formatString: #,0 €
+		lineageTag: 2b362f73-fcf0-5989-8f58-a2438c920f82
+
+	measure 'Abw VJ %' = DIVIDE ( [Ist Kosten] - [Ist Kosten VJ], [Ist Kosten VJ] )
+		formatString: 0.0 %
+		lineageTag: bf2b9c32-13e9-5a3a-8db5-ca54434f0ba4
+
+	measure 'Kosten YTD' = TOTALYTD ( [Ist Kosten], Fakt_Leistung[Monat] )
+		formatString: #,0 €
+		lineageTag: b97f11ec-1dd0-52e8-96c9-0ea54b86e0fa
+
+	measure 'Massnahmen offen' = CALCULATE ( COUNTROWS ( Massnahmen ), Massnahmen[Status] <> "abgeschlossen" )
+		formatString: #,0
+		lineageTag: 98db3b96-9f19-5992-80df-54e71f5a1aa9
+
+	measure 'Einsparung Ist' = SUM ( Massnahmen[Einsparung_Ist] )
+		formatString: #,0 €
+		lineageTag: 3d94c07a-13bf-58e3-8a0f-ce64c2e92a98
+
+	measure 'Einsparung Zielerreichung' = DIVIDE ( [Einsparung Ist], SUM ( Massnahmen[Einsparung_Plan] ) )
+		formatString: 0.0 %
+		lineageTag: dd756d2b-eda7-51d2-9452-d31d9741099e
+
+	measure 'KPI Status Text' =
+			IF (
+			    ( SUM ( Fakt_Leistung[Ist_Kosten] ) - SUM ( Fakt_Leistung[Plan_Kosten] ) ) / SUM ( Fakt_Leistung[Plan_Kosten] ) > 0.05
+			        && DIVIDE ( SUM ( Fakt_Leistung[Qualitaet_Bestanden] ), SUM ( Fakt_Leistung[Qualitaet_Pruefungen] ) ) < 0.9,
+			    "kritisch",
+			    IF (
+			        ( SUM ( Fakt_Leistung[Ist_Kosten] ) - SUM ( Fakt_Leistung[Plan_Kosten] ) ) / SUM ( Fakt_Leistung[Plan_Kosten] ) > 0.05
+			            || DIVIDE ( SUM ( Fakt_Leistung[Qualitaet_Bestanden] ), SUM ( Fakt_Leistung[Qualitaet_Pruefungen] ) ) < 0.9
+			            || SUM ( Fakt_Leistung[Krankheitstage] ) / SUM ( Fakt_Leistung[Sollarbeitstage] ) > 0.08,
+			        "beobachten",
+			        IF (
+			            CALCULATE ( COUNTROWS ( Massnahmen ), Massnahmen[Status] = "verzögert" ) > 0,
+			            "Maßnahme verzögert",
+			            "im Plan"
+			        )
+			    )
+			)
+		lineageTag: 699e424a-6fef-5c07-8f0f-cfd74474dd8f
+
+	column Monat
+		dataType: dateTime
+		formatString: dd.MM.yyyy
+		lineageTag: f2cfe1ee-81f1-5ec7-bac7-ef42bb6f76a5
+		summarizeBy: none
+		sourceColumn: Monat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1462a50e-b10e-56a5-b4ae-5b866043a8c7
+		summarizeBy: sum
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LeistungsartID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f057ea8-b3c8-5cd6-97e6-58357d2d7e45
+		summarizeBy: sum
+		sourceColumn: LeistungsartID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ist_Stunden
+		dataType: double
+		lineageTag: 9d6ff3e6-1ca5-5329-8147-2ded9dcd1a0c
+		summarizeBy: sum
+		sourceColumn: Ist_Stunden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plan_Stunden
+		dataType: double
+		lineageTag: 462ed29c-95a8-5746-8ef0-530edc204c20
+		summarizeBy: sum
+		sourceColumn: Plan_Stunden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ist_Kosten
+		dataType: double
+		lineageTag: ccce443c-56b8-5891-8ff0-37785c1f7450
+		summarizeBy: sum
+		sourceColumn: Ist_Kosten
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plan_Kosten
+		dataType: double
+		lineageTag: cc4e94dd-c6f3-5890-a205-b3b42a172366
+		summarizeBy: sum
+		sourceColumn: Plan_Kosten
+
+		annotation SummarizationSetBy = Automatic
+
+	column Leistungseinheiten
+		dataType: int64
+		formatString: 0
+		lineageTag: 79d32896-83af-56f3-a9a8-8227ec405c71
+		summarizeBy: sum
+		sourceColumn: Leistungseinheiten
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qualitaet_Pruefungen
+		dataType: int64
+		formatString: 0
+		lineageTag: e3e7d6e3-7aec-52ad-a6b6-d1cac37e0479
+		summarizeBy: sum
+		sourceColumn: Qualitaet_Pruefungen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qualitaet_Bestanden
+		dataType: int64
+		formatString: 0
+		lineageTag: bcf52f20-8bc2-5392-a8b3-f411a1c22620
+		summarizeBy: sum
+		sourceColumn: Qualitaet_Bestanden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Krankheitstage
+		dataType: int64
+		formatString: 0
+		lineageTag: 93c8bb7f-37a8-5aa3-b2e7-8dad863c7f4f
+		summarizeBy: sum
+		sourceColumn: Krankheitstage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sollarbeitstage
+		dataType: int64
+		formatString: 0
+		lineageTag: d8c348ec-7889-5524-89a2-590a2a56f3d4
+		summarizeBy: sum
+		sourceColumn: Sollarbeitstage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ueberstunden
+		dataType: double
+		lineageTag: 22052f2a-8ba6-57d6-9150-033a4ccfd379
+		summarizeBy: sum
+		sourceColumn: Ueberstunden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fakt_Leistung = m
+		mode: import
+		source =
+				let
+				    Quelle = Daten_Fakt_Leistung
+				in
+				    Quelle
+
+	annotation PBI_ResultType = Table

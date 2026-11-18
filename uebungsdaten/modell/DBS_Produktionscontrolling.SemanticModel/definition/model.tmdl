@@ -1,0 +1,17 @@
+model Model
+	culture: de-DE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: de-DE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Daten_Fakt_Leistung", "Daten_Massnahmen", "Kalender", "Region", "Leistungsart", "Fakt_Leistung", "Massnahmen"]
+
+ref table Kalender
+ref table Region
+ref table Leistungsart
+ref table Fakt_Leistung
+ref table Massnahmen

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "DBS_Produktionscontrolling"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "92fb265c-e905-4578-a21c-436f1b653bc2"
+  }
+}

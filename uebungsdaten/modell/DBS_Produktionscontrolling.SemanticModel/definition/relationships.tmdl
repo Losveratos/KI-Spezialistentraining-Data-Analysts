@@ -1,0 +1,19 @@
+relationship 0c30c600-c4e2-5805-9dd8-a96126a0bf7b
+	fromColumn: Fakt_Leistung.Monat
+	toColumn: Kalender.Datum
+
+relationship ef2511df-977a-58af-a525-bd77d2149bd3
+	fromColumn: Fakt_Leistung.RegionID
+	toColumn: Region.RegionID
+
+relationship fdaa33a6-2980-5da4-b3b0-6842fc7b975e
+	fromColumn: Fakt_Leistung.LeistungsartID
+	toColumn: Leistungsart.LeistungsartID
+
+relationship f29abebf-d169-5c02-8368-be27966e7380
+	fromColumn: Massnahmen.RegionID
+	toColumn: Region.RegionID
+
+relationship c7ec8cfe-846b-5e3c-bc1a-ba5ca9341761
+	fromColumn: Massnahmen.LeistungsartID
+	toColumn: Leistungsart.LeistungsartID

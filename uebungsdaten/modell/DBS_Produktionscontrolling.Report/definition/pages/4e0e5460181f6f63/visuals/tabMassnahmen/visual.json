@@ -1,0 +1,218 @@
+{
+  "name": "tabMassnahmen",
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "queryRef": "Massnahmen.MassnahmeID",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "MassnahmeID"
+                }
+              },
+              "nativeQueryRef": "MassnahmeID"
+            },
+            {
+              "queryRef": "Massnahmen.Titel",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Titel"
+                }
+              },
+              "nativeQueryRef": "Titel"
+            },
+            {
+              "queryRef": "Region.Region",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Region"
+                    }
+                  },
+                  "Property": "Region"
+                }
+              },
+              "nativeQueryRef": "Region"
+            },
+            {
+              "queryRef": "Leistungsart.Leistungsart",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Leistungsart"
+                    }
+                  },
+                  "Property": "Leistungsart"
+                }
+              },
+              "nativeQueryRef": "Leistungsart"
+            },
+            {
+              "queryRef": "Massnahmen.Status",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Status"
+                }
+              },
+              "nativeQueryRef": "Status"
+            },
+            {
+              "queryRef": "Massnahmen.Fortschritt",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Fortschritt"
+                }
+              },
+              "nativeQueryRef": "Fortschritt"
+            },
+            {
+              "queryRef": "Massnahmen.Zieltermin",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Zieltermin"
+                }
+              },
+              "nativeQueryRef": "Zieltermin"
+            },
+            {
+              "queryRef": "Massnahmen.Einsparung_Plan",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Einsparung_Plan"
+                }
+              },
+              "nativeQueryRef": "Einsparung_Plan"
+            },
+            {
+              "queryRef": "Massnahmen.Einsparung_Ist",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Einsparung_Ist"
+                }
+              },
+              "nativeQueryRef": "Einsparung_Ist"
+            },
+            {
+              "queryRef": "Massnahmen.Kommentar",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Massnahmen"
+                    }
+                  },
+                  "Property": "Kommentar"
+                }
+              },
+              "nativeQueryRef": "Kommentar"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Massnahmen"
+                  }
+                },
+                "Property": "MassnahmeID"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {},
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Massnahmen'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "position": {
+    "x": 20,
+    "y": 175,
+    "width": 1240,
+    "height": 525,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json"
+}

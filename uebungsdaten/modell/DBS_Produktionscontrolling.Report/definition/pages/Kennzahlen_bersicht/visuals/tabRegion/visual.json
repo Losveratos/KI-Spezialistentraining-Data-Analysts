@@ -1,0 +1,190 @@
+{
+  "name": "tabRegion",
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "queryRef": "Region.Region",
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Region"
+                    }
+                  },
+                  "Property": "Region"
+                }
+              },
+              "nativeQueryRef": "Region"
+            },
+            {
+              "queryRef": "Fakt_Leistung.Ist Kosten",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "Ist Kosten"
+                }
+              },
+              "nativeQueryRef": "Ist Kosten"
+            },
+            {
+              "queryRef": "Fakt_Leistung.Plan Kosten",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "Plan Kosten"
+                }
+              },
+              "nativeQueryRef": "Plan Kosten"
+            },
+            {
+              "queryRef": "Fakt_Leistung.Abw Kosten %",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "Abw Kosten %"
+                }
+              },
+              "nativeQueryRef": "Abw Kosten %"
+            },
+            {
+              "queryRef": "Fakt_Leistung.m_QQ",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "m_QQ"
+                }
+              },
+              "nativeQueryRef": "m_QQ"
+            },
+            {
+              "queryRef": "Fakt_Leistung.Krankenquote",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "Krankenquote"
+                }
+              },
+              "nativeQueryRef": "Krankenquote"
+            },
+            {
+              "queryRef": "Fakt_Leistung.Ueberstundenquote",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "Ueberstundenquote"
+                }
+              },
+              "nativeQueryRef": "Ueberstundenquote"
+            },
+            {
+              "queryRef": "Fakt_Leistung.KPI Status Text",
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fakt_Leistung"
+                    }
+                  },
+                  "Property": "KPI Status Text"
+                }
+              },
+              "nativeQueryRef": "KPI Status Text"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Fakt_Leistung"
+                  }
+                },
+                "Property": "Ist Kosten"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {},
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Kennzahlen je Region'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "position": {
+    "x": 20,
+    "y": 260,
+    "width": 1240,
+    "height": 440,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json"
+}
