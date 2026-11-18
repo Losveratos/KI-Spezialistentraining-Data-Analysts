@@ -15,6 +15,7 @@ auf Ihre eigenen Modelle und Berichte übertragen können.
 | [prompts/kontext/](prompts/kontext/README.md) | Kontextdateien (Arbeitsregeln, DAX-Styleguide, TMDL-Kurzreferenz, Kommentar-Leitfaden, Glossar) zum Hinterlegen in Copilot |
 | [prompts/modul1/](prompts/modul1/) | Prompts für TMDL, DAX, M, SQL, Dokumentation, KI-Fähigkeit |
 | [prompts/modul2/](prompts/modul2/) | Prompts für Datenprüfung, Kommentare, Korrelationen, Maßnahmentracking |
+| [leitfaeden/](leitfaeden/README.md) | Leitfäden zum Nachschlagen: Power Query, DAX, TMDL, Dokumentation aus TMDL, Checkliste Berichtsveröffentlichung |
 | [uebungen/](uebungen/) | Übungsaufgaben je Modul (Lösungen besprechen wir im Training) |
 | [uebungsdaten/modell/](uebungsdaten/modell/README.md) | Übungsmodell „DBS Produktionscontrolling“ (Power-BI-Projekt) |
 | [uebungsdaten/modul1/](uebungsdaten/modul1/) | Code-Beispiele für die Übungen (Power Query, SQL, Fehlerfälle, DAX-Abfragen) |
