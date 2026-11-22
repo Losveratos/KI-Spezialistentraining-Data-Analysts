@@ -130,6 +130,7 @@ Vollständig: [L05 Checkliste Berichtsveröffentlichung](leitfaeden/L05_Checklis
 | DAX / M / SQL formatieren und kommentieren | [M1-03](prompts/modul1/M1-03_DAX-formatieren-kommentieren.md) · [M1-04](prompts/modul1/M1-04_M-formatieren-kommentieren.md) · [M1-05](prompts/modul1/M1-05_SQL-formatieren-kommentieren.md) |
 | ein langes Measure verstehen und umbauen | [M1-06](prompts/modul1/M1-06_Grosses-Measure-analysieren.md) · [M1-07](prompts/modul1/M1-07_Measure-refaktorisieren-und-testen.md) |
 | einen Fehler beheben | [M1-08](prompts/modul1/M1-08_Fehler-beheben.md) |
+| aus einer unsauberen Excel- oder CSV-Datei eine Power-Query-Abfrage bauen | [M1-14](prompts/modul1/M1-14_Excel-Chaos-zu-Power-Query.md) |
 | ein neues Measure schreiben lassen | [M1-09](prompts/modul1/M1-09_Measure-aus-TMDL-Kontext.md) |
 | Modell oder Bericht dokumentieren | [M1-10](prompts/modul1/M1-10_Modell-dokumentieren.md) · [M1-11](prompts/modul1/M1-11_Bericht-dokumentieren.md) · [L04](leitfaeden/L04_Dokumentation-aus-TMDL.md) |
 | Beschreibungen ins Modell bringen, Modell KI-fähig machen | [M1-12](prompts/modul1/M1-12_Beschreibungen-als-TMDL.md) · [M1-13](prompts/modul1/M1-13_Modell-KI-faehig-machen.md) |

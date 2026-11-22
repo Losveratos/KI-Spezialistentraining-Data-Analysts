@@ -5,7 +5,8 @@
 > teils DirectQuery. **Bezug:** Modul 1, Ü1.4 und Ü1.8; Einzelprompts [M1-04](../prompts/modul1/M1-04_M-formatieren-kommentieren.md)
 > (formatieren, kommentieren) und [M1-08](../prompts/modul1/M1-08_Fehler-beheben.md) (Fehler beheben); Grundregeln:
 > [00 · Prompting](../prompts/00_Prompting-Grundregeln.md); im Notebook: [K01 · Arbeitsregeln](../prompts/kontext/K01_Arbeitsregeln-BI-Copilot.md);
-> Übungsabfrage: [SAP_Export_Leistung.pq](../uebungsdaten/modul1/SAP_Export_Leistung.pq).
+> Übungsabfrage: [SAP_Export_Leistung.pq](../uebungsdaten/modul1/SAP_Export_Leistung.pq); unsaubere Dateien zum Üben:
+> [Excel-Chaos](../uebungsdaten/excel-chaos/README.md) mit Prompt [M1-14](../prompts/modul1/M1-14_Excel-Chaos-zu-Power-Query.md).
 
 ## Auf einen Blick
 

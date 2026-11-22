@@ -22,6 +22,7 @@ Die Lösungen besprechen wir gemeinsam im Training.
 | Ü1.10 | M1.6 | Berichtsseite dokumentieren | M1-11 | 10 min |
 | Ü1.11 | M1.7 | Beschreibungen als TMDL zurückschreiben, `m_QQ` umbenennen | M1-12 | 10 min |
 | Ü1.12 | M1.7 | Modell KI-fähig machen, AI-Instructions entwerfen | M1-13 | 10 min |
+| Ü1.13 | M1.4 oder Zusatz | Excel-Chaos zu Power Query: aus unsauberen Dateien eine robuste Abfrage | M1-14 | 20 min |
 | Z1.1 | Zusatz | Modellhygiene per TMDL umsetzen (Zeitintelligenz, ID-Spalten, Sortierung, Datumstabelle) | M1-13 | 15 min |
 
 In Block M1.4 bearbeiten Sie **zwei der drei** Übungen Ü1.3–Ü1.5 – die, die Ihrem Arbeitsalltag am nächsten sind.
@@ -233,6 +234,25 @@ Bedeutungen gekennzeichnet; Lückenliste.
 
 **Erwartetes Ergebnis:** Priorisierte Review-Tabelle, Vorschlag für das AI data schema, AI-Instructions unter 3.000 Zeichen,
 3–5 verified-answer-Vorschläge.
+
+## Ü1.13 · Excel-Chaos zu Power Query (20 min, Wahl)
+
+**Ziel:** Sie lassen Copilot eine „gewachsene“ Excel- oder CSV-Datei analysieren und eine robuste Power-Query-Abfrage
+schreiben – und beweisen mit Kontrollwerten, dass sie richtig lädt.
+
+**Schritte**
+1. Eine Datei aus `uebungsdaten/excel-chaos/` wählen (01–05) und zuerst selbst öffnen: Was fällt Ihnen auf?
+   Einstieg: 01 oder 04; anspruchsvoller: 02 oder 03.
+2. Prompt **M1-14**, Schritt 1: Datei anhängen und die Struktur analysieren lassen. Vergleichen Sie Copilots
+   Problemliste mit Ihrer eigenen. Was hat Copilot übersehen?
+3. Prompt **M1-14**, Schritt 2: Zielschema aus `uebungsdaten/excel-chaos/README.md` einsetzen, Abfrage schreiben lassen.
+4. In Power BI Desktop testen (Parameter `pDatei`, leere Abfrage, Erweiterter Editor – Anleitung in der README).
+5. Zeilenzahl und Summe mit den Kontrollwerten vergleichen. Bei Fehlern oder Abweichungen: Nachschärf-Prompts aus M1-14.
+6. Zerbrechlichkeit prüfen: In einer Kopie der Datei eine Zeile im Vorspann einfügen und aktualisieren. Lädt die Abfrage noch?
+
+**Erwartetes Ergebnis:** Eine lauffähige Abfrage ohne feste Zeilenzahlen, Spaltenpositionen und Pfade, deren
+Zeilenzahl und Summen mit den Kontrollwerten übereinstimmen – und eine Liste der Probleme, die Copilot erst auf
+Nachfrage gefunden hat.
 
 ## Z1.1 · Zusatz: Modellhygiene per TMDL umsetzen (15 min)
 

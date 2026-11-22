@@ -20,6 +20,7 @@ auf Ihre eigenen Modelle und Berichte übertragen können.
 | [uebungen/](uebungen/) | Übungsaufgaben je Modul (Lösungen besprechen wir im Training) |
 | [uebungsdaten/modell/](uebungsdaten/modell/README.md) | Übungsmodell „DBS Produktionscontrolling“ (Power-BI-Projekt) |
 | [uebungsdaten/modul1/](uebungsdaten/modul1/) | Code-Beispiele für die Übungen (Power Query, SQL, Fehlerfälle, DAX-Abfragen) |
+| [uebungsdaten/excel-chaos/](uebungsdaten/excel-chaos/README.md) | Fünf typische „gewachsene“ Excel- und CSV-Dateien, aus denen Copilot Power-Query-Abfragen bauen soll – mit Zielschema und Kontrollwerten |
 | [uebungsdaten/modul2/](uebungsdaten/modul2/) | KPI-Exporte (Excel, CSV) für die Analyseübungen |
 
 ## So nutzen Sie die Prompt-Dateien
