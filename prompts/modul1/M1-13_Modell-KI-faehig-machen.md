@@ -11,18 +11,23 @@ prüft Ihr Modell gegen die Microsoft-Empfehlungen und entwirft die drei Baustei
 AI data schema (welche Felder Copilot nutzen soll), AI instructions (Fachsprache und Regeln) und Vorschläge für
 verified answers (geprüfte Antworten auf Standardfragen).
 
-## Was es in Power BI gibt (Stand 11/2026, Preview)
+## Was es in Power BI gibt (Stand 22.11.2026, laut Microsoft Learn weiterhin Vorschau)
 - **Prep data for AI** (deutsche Oberfläche ggf. „Daten für KI vorbereiten“): Schaltfläche im Menüband **Start** in Desktop
   bzw. auf der Seite des semantischen Modells im Service. Drei Registerkarten:
-  - **AI data schema** („Simplify data schema“): Teilmenge der Tabellen, Spalten, Measures, die Copilot bevorzugt.
-  - **AI instructions**: freier Text mit Geschäftskontext und Regeln, max. 10.000 Zeichen, gespeichert im Modell,
-    für Endnutzer unsichtbar. Keine Garantie, dass Copilot sich daran hält.
-  - **Verified answers**: an einem Visual (… › „Set up a verified answer“) mit Triggerphrasen und bis zu drei Filtern;
-    Slicer werden nicht unterstützt.
-- Voraussetzungen: **Q&A** muss für das Modell aktiviert sein (sonst sind die Registerkarten deaktiviert); Copilot in Desktop
-  braucht einen Arbeitsbereich auf **Fabric-Kapazität F2+ oder Premium P1+** (bzw. eine Fabric Copilot capacity), keine
-  Testkapazität, und die Freigabe durch den Fabric-Admin. In Desktop ggf. unter Optionen › Vorschaufeatures „Prep data for AI“ aktivieren.
-- Im Service lässt sich das Modell danach als **Approved for Copilot** markieren.
+  - **AI data schema** (Registerkarte „Simplify data schema“, dt. „Datenschema vereinfachen“): Teilmenge der Tabellen,
+    Spalten, Measures, die Copilot für Datenfragen nutzt. Für DAX-Abfragen und neue Berichtsseiten nimmt Copilot weiter das ganze Modell.
+  - **AI instructions** (dt. „KI-Anweisungen“): freier Text mit Geschäftskontext und Regeln, max. 10.000 Zeichen, gespeichert
+    im Modell, für Endnutzer unsichtbar. Keine Garantie, dass Copilot sich daran hält.
+  - **Verified answers** (dt. „Überprüfte Antworten“): an einem Visual (… › „Set up a verified answer“) mit Triggerphrasen
+    und bis zu drei Filtern; Slicer werden nicht unterstützt.
+- Voraussetzungen: **Q&A** muss für das Modell aktiviert sein (sonst sind die Registerkarten deaktiviert). Copilot in Desktop
+  braucht Schreibzugriff auf einen Arbeitsbereich auf **bezahlter Fabric-Kapazität (F2+) oder Premium-Kapazität (P1+)** –
+  oder eine Fabric Copilot capacity. Testkapazität (Trial) und Premium-Einzelbenutzer (PPU) reichen nicht. Copilot ist im
+  Mandanten standardmäßig aktiv, der Fabric-Admin kann es abschalten. In Desktop ggf. unter Optionen › Vorschaufeatures
+  „Prep data for AI“ aktivieren.
+- Im Service lässt sich das Modell danach in den Modelleinstellungen als **Approved for Copilot** (früher „Prepped for AI“)
+  markieren. Das wirkt vor allem im eigenständigen Copilot (Standalone) – dessen Unterstützung endet laut Microsoft Ende
+  Januar 2027, ebenso der Copilot in Arbeitsbereichs-Apps; Copilot im Bericht bleibt.
 - **Sprache:** Q&A und die Copilot-Datenfragen sind offiziell nur für Englisch freigegeben; Q&A wird im Februar 2027 eingestellt.
   Für das deutschsprachige Übungsmodell (Kultur de-DE) vorab testen, ob die Registerkarten nutzbar sind.
 
@@ -45,7 +50,7 @@ keine summierten IDs; markierte Datumstabelle; Sortierspalten; Sternschema; expl
 Aggregation; AI data schema, AI instructions, verified answers.
 
 Kontext:
-- Modell (TMDL ohne Partitionen oder INFO.VIEW-Listen): [EINFÜGEN]
+- Modell (TMDL ohne Partitionen oder INFO.VIEW-Listen): [EINFÜGEN: TMDL oder Listen]
 - Fachliche Definitionen und Begriffe: [EINFÜGEN: Glossar K05]
 - Typische Fragen der Nutzer: [EINFÜGEN: 5–10 Fragen oder „keine, bitte vorschlagen“]
 
@@ -98,15 +103,18 @@ der Antwort erkenne, dass die Regel gewirkt hat.
 - Prep data for AI ersetzt kein sauberes Modell: Ein Feld mit schlechtem Namen wird durch eine Instruction nicht eindeutig.
   Erst Namen, Beschreibungen, Ausblenden – dann Instructions.
 - Änderungen an Schema, Instructions und verified answers wirken erst, wenn der Copilot-Bereich neu geöffnet wurde.
-- Bei Bereitstellung über Git oder Deployment-Pipelines muss das Modell im Service aktualisiert werden, damit die Einstellungen greifen.
+- Bei Bereitstellung über Git oder Deployment-Pipelines muss das Modell im Service aktualisiert werden, damit Schema und
+  Instructions greifen. Verified answers werden über Git, REST-API und Deployment-Pipelines laut Microsoft nicht unterstützt.
 - Instructions sind Text für ein Sprachmodell, keine Programmlogik. Widersprüchliche oder sehr viele Regeln verschlechtern die Antworten.
 
-## Quellen (Microsoft Learn, geprüft 18.11.2026)
+## Quellen (Microsoft Learn, geprüft 22.11.2026)
 - Prepare your data for AI: https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai
 - AI instructions: https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai-instructions
 - AI data schema: https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai-data-schema
 - Verified answers: https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai-verified-answers
 - Copilot in Power BI Desktop (Voraussetzungen): https://learn.microsoft.com/power-bi/create-reports/copilot-power-bi-desktop
+- Copilot in Power BI – Kapazität, keine Testkapazität: https://learn.microsoft.com/power-bi/create-reports/copilot-introduction
+- Einstellung des eigenständigen Copilot (Neuerungen November 2026): https://learn.microsoft.com/power-bi/fundamentals/whats-new
 - Copilot mit semantischen Modellen: https://learn.microsoft.com/power-bi/create-reports/copilot-semantic-models
 - Modell für Copilot optimieren: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data
 - Q&A-Einstellung (Februar 2027): https://learn.microsoft.com/power-bi/natural-language/q-and-a-tooling-intro

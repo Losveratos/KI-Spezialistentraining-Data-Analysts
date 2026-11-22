@@ -4,8 +4,8 @@
 |---|---|---|---|
 | 2 | M365 Copilot Chat (mit K02) + Power BI Desktop (DAX-Abfrageansicht); optional Copilot in der DAX-Abfrageansicht* | Ü2.9 (optional) | 15 min |
 
-\* Nur mit Workspace auf bezahlter Fabric-Kapazität (ab F2) oder Premium (ab P1) und Admin-Freigabe.
-Der Weg über M365 Copilot Chat funktioniert immer.
+\* Nur mit Arbeitsbereich auf bezahlter Fabric-Kapazität (ab F2) oder Power BI Premium (ab P1) und Admin-Freigabe;
+Testkapazitäten (Trial) werden nicht unterstützt. Der Weg über M365 Copilot Chat funktioniert immer.
 
 ## Wofür
 Wiederkehrende **Faktensätze** („Kosten Ost 2026-10: 1.234.567 € IST, +7,1 % ΔPL, +9,8 % ΔVJ“) muss niemand
@@ -144,8 +144,10 @@ Teile den Text in zwei Measures (Kosten-Satz, Qualitäts-Satz) und schlag vor, w
 ## Stolperfallen
 - **Ein Text-Measure prüft keine Daten.** Der Kommafehler im September landet ungefiltert im Satz für Südwest/Sep.
   Plausibilitätscheck (M2-03) bleibt Pflicht.
-- **FORMAT mit Gebietsschema.** Das dritte Argument „de-DE“ macht das Ergebnis unabhängig von Einstellungen.
-  Meldet Ihre Desktop-Version „zu viele Argumente“, das Argument weglassen – die Modellkultur de-DE gilt dann.
-- **Leere Werte sind kleiner als jede Schwelle.** `BLANK() < 0.9` ist wahr. Deshalb `NOT ISBLANK` vor jedem Vergleich.
+- **FORMAT mit Gebietsschema.** Das dritte Argument „de-DE“ legt Tausender- und Dezimaltrennzeichen fest. Ohne
+  das Argument richtet sich FORMAT nach der Modellkultur (im Übungsmodell de-DE).
+- **Leere Werte sind kleiner als jede positive Schwelle.** `BLANK() < 0.9` ist wahr, deshalb `NOT ISBLANK` vor jedem
+  Vergleich. Gleiches gilt für `ABS ( _AbwPL ) <= _SchwelleImPlan`: Ohne Planwert meldet die Referenzlösung
+  „im Plan“ – bei eigenen Daten vorher `ISBLANK ( _PlanKosten )` abfangen.
 - **Text-Measures in großen Tabellen** werden für jede Zeile berechnet. Für Übersichten mit wenigen Zeilen
   unkritisch; nicht in Matrizen mit Tausenden Zellen einsetzen.

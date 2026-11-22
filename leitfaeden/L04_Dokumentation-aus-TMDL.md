@@ -38,7 +38,8 @@
 
 1. **Metadaten holen.** A: TMDL ohne `partition`- und `expression`-Blöcke (im Übungsmodell nie `Daten_Fakt_Leistung` /
    `Daten_Massnahmen`). B: Abfragen 1–4 aus [`INFO_Abfragen.dax`](../uebungsdaten/modul1/INFO_Abfragen.dax) ausführen,
-   Ergebnisse in `Modell-Metadaten.txt` sammeln. Die DAX-Spalte von INFO.VIEW.MEASURES ist nur mit Schreibrechten gefüllt.
+   Ergebnisse in `Modell-Metadaten.txt` sammeln. Die DAX-Spalte von INFO.VIEW.MEASURES ist nur mit Schreibrechten gefüllt –
+   nicht bei einer Liveverbindung aus Desktop.
 2. **Quellen selbst zusammenfassen:** je Tabelle eine Zeile („Fakt_Leistung – Azure-SQL-View, Import, täglich“), ohne Server,
    Datenbanken, SQL- oder SAP-Abfragen.
 3. **Notebook „Modelldoku“** mit Referenzen: Vorlage (unten, als `.txt` oder Word-Datei), K05, K03, `Modell-Metadaten.txt`.
@@ -48,8 +49,9 @@
 6. **Zurück ins Modell:** bestätigte Definitionen per [M1-12](../prompts/modul1/M1-12_Beschreibungen-als-TMDL.md) als
    Beschreibungen anwenden. Die nächste Doku liest sie über INFO.VIEW mit – Ableitungen werden mit jeder Runde weniger.
 
-**Mit Kapazität** (F2+/P1+, Admin-Freigabe, keine Testkapazität) erzeugt Copilot in Power BI Beschreibungen einzeln aus dem
-DAX (**Mit Copilot erstellen**) – ohne fachliches Wissen; der M365-Copilot-Weg mit Glossar bleibt die Grundlage.
+**Mit Kapazität** (bezahlte Fabric-Kapazität F2+ oder Premium P1+ bzw. Fabric Copilot capacity; keine Testkapazität, kein PPU)
+erzeugt Copilot in Power BI Measure-Beschreibungen einzeln aus dem DAX (**Erstellen mit Copilot**, engl. *Create with Copilot*) –
+ohne fachliches Wissen; der M365-Copilot-Weg mit Glossar bleibt die Grundlage.
 
 ### Doku-Vorlage (Markdown-Gerüst)
 
@@ -141,7 +143,7 @@ Im Notebook „Modelldoku“ gilt für alle Prompts: Bedeutung nur aus Beschreib
 
 ```text
 Du bist technischer Redakteur für Power-BI-Modelle. Fülle Abschnitt 1 "Steckbrief" der Vorlage.
-Kontext: model.tmdl und database.tmdl [EINFÜGEN], Tabellenliste aus Abfrage 1 [EINFÜGEN],
+Kontext: model.tmdl und database.tmdl [EINFÜGEN: TMDL], Tabellenliste aus Abfrage 1 [EINFÜGEN: Ergebnis],
 meine Angaben [EINFÜGEN: Zweck, Zielgruppe, Berichte, Aktualisierung, verantwortliche Rolle].
 Regeln: Technische Werte (Kultur, Kompatibilitätsstufe, Speichermodus) nur aus dem Kontext. Fehlt eine Angabe: "[offen]".
 Ausgabe: Markdown-Tabelle wie in der Vorlage, danach 3 Sätze "Worum geht es in diesem Modell?".
@@ -191,7 +193,7 @@ Keine Beziehungen oder Tabellen erfinden.
 **Wann:** Kennzahlen, Abkürzungen und Fachbegriffe müssen für Leser außerhalb des BI-Teams erklärt werden.
 
 ```text
-Erstelle Abschnitt 6 "Glossar" aus dem fertigen Measure-Katalog [EINFÜGEN] und dem Glossar K05.
+Erstelle Abschnitt 6 "Glossar" aus dem fertigen Measure-Katalog [EINFÜGEN: Measure-Katalog] und dem Glossar K05.
 Aufgabe: Alle Fachbegriffe und Abkürzungen aus Measure-, Spalten- und Ordnernamen (z. B. Abw, VJ, YTD, QQ, Leistungsart,
 Geschäftsfeld), je mit Bedeutung in einem Satz und 1–3 Synonymen, wie Fachleute danach fragen.
 Regeln: Bedeutungen aus K05 übernehmen; was dort fehlt, als "(abgeleitet)" kennzeichnen. Alphabetisch sortieren.
@@ -206,7 +208,7 @@ Regeln: Bedeutungen aus K05 übernehmen; was dort fehlt, als "(abgeleitet)" kenn
 **Wann:** Die technische Doku ist geprüft; Berichtsnutzer brauchen eine Seite ohne DAX.
 
 ```text
-Erstelle aus der geprüften Modelldoku [EINFÜGEN oder "siehe Notebook"] eine Fassung für Fachanwender (höchstens 2 Seiten):
+Erstelle aus der geprüften Modelldoku [EINFÜGEN: Modelldoku oder "siehe Notebook"] eine Fassung für Fachanwender (höchstens 2 Seiten):
 Kennzahlen nach Themen (Kosten, Personal, Qualität, Maßnahmen) mit je einem Satz Bedeutung, Einheit und "gut ist";
 Zeitlogik (Berichtsmonat, Vorjahr, YTD); 5 Lesehinweise; bekannte Einschränkungen in Alltagssprache.
 Regeln: Keine DAX-Funktionen, keine ID-Spalten, nichts, was nicht in der Doku steht. Namen so, wie Nutzer sie im Bericht sehen.
@@ -266,7 +268,7 @@ Ausgabe: Tabellenzeile(n) Datum | Version | Änderung | Auswirkung, danach eine 
 
 ## Weiterführend
 
-Microsoft Learn, geprüft am 18.11.2026:
+Microsoft Learn, geprüft am 22.11.2026:
 
 - INFO-Funktionen in DAX (inkl. INFO.VIEW): https://learn.microsoft.com/dax/info-functions-dax
 - INFO.VIEW.MEASURES (Hinweis zu Schreibrechten): https://learn.microsoft.com/dax/info-view-measures-function-dax
@@ -274,4 +276,5 @@ Microsoft Learn, geprüft am 18.11.2026:
 - Power BI-Projekte (PBIP) und Git: https://learn.microsoft.com/power-bi/developer/projects/projects-overview
 - Ordner des semantischen Modells (u. a. `DAXQueries`): https://learn.microsoft.com/power-bi/developer/projects/projects-dataset
 - Copilot in Power BI Desktop (Voraussetzungen): https://learn.microsoft.com/power-bi/create-reports/copilot-power-bi-desktop
+- Measure-Beschreibungen mit Copilot: https://learn.microsoft.com/power-bi/transform-model/desktop-measure-copilot-descriptions
 - Ausblick Fabric – Semantic Link: https://learn.microsoft.com/fabric/data-science/semantic-link-power-bi

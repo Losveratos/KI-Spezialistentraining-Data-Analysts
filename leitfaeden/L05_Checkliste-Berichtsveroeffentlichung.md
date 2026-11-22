@@ -5,7 +5,7 @@
 > vollständig; bei **Änderungen** nur die betroffenen Abschnitte (neues Measure → 2, 3; neue Seite → 4, 5, 6;
 > neue Quelle → 1, 6, 7). Ergebnis in der Abnahme festhalten. **Bezug:** [L01 · Power Query](L01_Power-Query.md),
 > [L02 · DAX](L02_DAX.md), [L03 · TMDL](L03_TMDL.md), [L04 · Dokumentation aus TMDL](L04_Dokumentation-aus-TMDL.md).
-> Feature-Aussagen geprüft gegen Microsoft Learn am 18.11.2026; vieles ist Preview oder hängt von
+> Feature-Aussagen geprüft gegen Microsoft Learn am 22.11.2026; vieles ist Preview oder hängt von
 > Mandanten-Einstellungen ab – im Zweifel mit Ihrer Fabric-Administration klären.
 
 ## So nutzen Sie die Checkliste mit Copilot
@@ -26,8 +26,8 @@ Copilot sieht Ihren Bericht nicht. Sie geben ihm, was er prüfen kann – **Copi
 - Punkte mit **(manuell)** kann Copilot nicht prüfen (Gateway, Berechtigungen, Service-Einstellungen).
 - Datenschutz: Screenshots und Abgleichstabellen enthalten Zahlen. Nur im unternehmensfreigegebenen Copilot arbeiten,
   keine personenbezogenen Daten ([Grundregeln](../prompts/00_Prompting-Grundregeln.md), Regel 10).
-- Copilot in Power BI (Berichtsbereich, Prep data for AI) braucht Fabric-Kapazität ab F2 bzw. Premium ab P1,
-  Admin-Freigabe und keine Testkapazität. Die Checkliste funktioniert auch ohne.
+- Copilot in Power BI (Berichtsbereich, Prep data for AI): Arbeitsbereich auf bezahlter Kapazität (F2+/P1+) oder zugewiesene
+  Fabric-Copilot-Kapazität, dazu Admin-Freigabe; Testkapazitäten (Trial) reichen nicht. Die Checkliste funktioniert auch ohne.
 
 ## 1 Daten und Aktualisierung
 
@@ -40,8 +40,8 @@ Copilot sieht Ihren Bericht nicht. Sie geben ihm, was er prüfen kann – **Copi
 - [ ] **(manuell)** Zeitplan passt zum Datenfluss: Modell aktualisiert **nach** Dataflow und SAP-Export, nicht davor.
 - [ ] Große Faktentabellen: inkrementelle Aktualisierung geprüft (`RangeStart`/`RangeEnd`, Filter faltet zur Quelle,
       siehe [L01](L01_Power-Query.md)). Danach kein erneutes Publish desselben Modells aus Desktop.
-- [ ] **(manuell)** Fehlerfall: Fehlerbenachrichtigung an Besitzer aktiv, zusätzlich Team-Postfach unter „Diese Kontakte
-      benachrichtigen“ (nur Konten im eigenen Mandanten). Nach vier Fehlschlägen in Folge deaktiviert der Service den Zeitplan.
+- [ ] **(manuell)** Fehlerfall: Fehlerbenachrichtigung an Besitzer aktiv, zusätzlich Team-Postfach unter „Diesen Kontakten
+      eine E-Mail senden, wenn die Aktualisierung fehlschlägt“. Nach vier Fehlschlägen in Folge deaktiviert der Service den Zeitplan.
 - [ ] Ausgefallene Quelle getestet: Was zeigt der Bericht, wenn der SAP-Export fehlt oder leer ist?
 - [ ] **Datenstand sichtbar** auf jeder Seite (Measure „Daten bis“ aus dem letzten Buchungsdatum, nicht `NOW()`),
       dazu der Berichtsmonat im Titel oder Untertitel.
@@ -76,8 +76,8 @@ Ausgabe: Tabelle, danach höchstens 5 Stichpunkte. Liste am Ende alle Annahmen a
 ```text
 Du bist Power-BI-Architekt*in und machst die Modellabnahme vor der Veröffentlichung.
 Kontext:
-- TMDL des Modells ohne Partitionen: [EINFÜGEN]
-- Ergebnis Abfrage 5 und 6 aus INFO_Abfragen.dax: [EINFÜGEN]
+- TMDL des Modells ohne Partitionen: [EINFÜGEN: TMDL-Skript]
+- Ergebnis Abfrage 5 und 6 aus INFO_Abfragen.dax: [EINFÜGEN: kopierte Ergebnistabellen]
 - Prüfliste: Abschnitt 2 der Checkliste L05 und DAX-Styleguide K02 (im Notebook).
 Aufgabe: Prüfe das Modell Punkt für Punkt gegen Abschnitt 2. Bewerte jede Zeile aus Abfrage 6 als echten Befund
 oder Fehlalarm (die Abfrage sucht nur nach Text, z. B. „/“ auch in Kommentaren).
@@ -100,7 +100,7 @@ Wenn Informationen fehlen, frag nach, statt zu raten.
 - [ ] Datenqualität vor Kommentar: Dubletten, Ausreißer, Kommafehler ([M2-03](../prompts/modul2/M2-03_Datenprofil-und-Plausibilitaetscheck.md));
       Maßnahmentracking konsistent ([M2-08](../prompts/modul2/M2-08_Massnahmentracking-Konsistenzcheck.md)).
 
-Abgleichsabfrage für die DAX-Abfrageansicht (Namen aus dem Übungsmodell, Ergebnis als Excel speichern):
+Abgleichsabfrage für die DAX-Abfrageansicht (Namen aus dem Übungsmodell; Ergebnis kopieren und in Excel einfügen):
 
 ```dax
 EVALUATE
@@ -143,7 +143,7 @@ Ausgabe: Tabelle der Abweichungen, danach höchstens 5 Prüfhinweise. Zeige dein
 ```text
 Du bist Reviewer*in für Power-BI-Berichte im Produktionscontrolling.
 Kontext: Anhang = Screenshot der Seite [EINFÜGEN: Seitenname] des Berichts [EINFÜGEN: Kennzahlenübersicht /
-Detailbericht / Maßnahmentracking], Zielgruppe [EINFÜGEN]. Prüfliste: Abschnitte 4 und 5 der L05, Notation laut K04.
+Detailbericht / Maßnahmentracking], Zielgruppe [EINFÜGEN: z. B. Bereichsleitung]. Prüfliste: Abschnitte 4 und 5 der L05, Notation laut K04.
 Aufgabe: Prüfe die Seite gegen jeden Punkt aus Abschnitt 4 und gegen die sichtbaren Punkte aus Abschnitt 5
 (Kontrast, Farbe als einziges Merkmal, Lesbarkeit). Schlage für jeden Visual-Titel einen Aussage-Titel vor.
 Regeln: Beurteile nur, was im Bild erkennbar ist; Interaktionen, Tooltips, Lesezeichen und Alt-Text kennzeichnest du
@@ -158,13 +158,13 @@ Ausgabe: Tabelle „Prüfpunkt | Visual | Befund | Vorschlag | Priorität (hoch/
 - [ ] Keine schwer unterscheidbaren Paare (Rot/Grün, Grün/Braun, Blau/Lila) im selben Diagramm.
 - [ ] Alt-Text für jedes inhaltliche Visual (Format › Allgemein › Alternativtext, max. 250 Zeichen), bei wechselnden
       Zahlen dynamisch per Measure.
-- [ ] Tab-Reihenfolge gesetzt (Ansicht › Auswahl › Aktivierreihenfolge); dekorative Formen und Bilder daraus entfernt.
+- [ ] Tab-Reihenfolge gesetzt (Ansicht › Auswahl › Aktivierreihenfolge/Tab order); dekorative Formen und Bilder daraus entfernt.
 - [ ] Sortierung jedes Visuals bewusst gesetzt – die barrierefreie Datentabelle (Alt+Umschalt+F11) übernimmt sie.
 - [ ] Bericht einmal nur mit der Tastatur bedient, inklusive Schaltflächen und Lesezeichen.
 
 ```text
 Du schreibst Alternativtexte für Power-BI-Visuals.
-Kontext: Anhang = Screenshot der Seite; Visuals mit Titel und Zweck: [EINFÜGEN]
+Kontext: Anhang = Screenshot der Seite; Visuals mit Titel und Zweck: [EINFÜGEN: Liste]
 Aufgabe: Formuliere je Visual einen Alt-Text: was gezeigt wird (Kennzahl, Gliederung, Vergleich) und welche Frage es
 beantwortet. Kennzeichne dekorative Visuals, die aus der Tab-Reihenfolge sollen.
 Regeln: Höchstens 250 Zeichen, keine konkreten Zahlen (die Daten ändern sich), Fachbegriffe ausschreiben („Plan“
@@ -177,7 +177,7 @@ Ausgabe: Tabelle „Visual | Alt-Text | Zeichenzahl“.
 - [ ] Leistungsanalyse je Seite aufgezeichnet (Aufzeichnung starten › Visuals aktualisieren), auch nach typischen
       Slicer-Klicks; Ergebnis als `.json` exportiert.
 - [ ] Langsame Visuals nach Ursache getrennt: **DAX-Abfrage** (Measure optimieren, [L02](L02_DAX.md)), **Direkte Abfrage**
-      (Quelle, Index, Folding), **Visualanzeige** (zu viele Datenpunkte, Bilder).
+      (Quelle, Index, Folding), **Visualanzeige** (Visual display: zu viele Datenpunkte, Bilder).
 - [ ] Visuals je Seite begrenzt (Teamrichtwert festlegen, z. B. 8–12 datenbezogene Visuals – Erfahrungswert, keine
       Microsoft-Grenze); mehrere Karten durch ein Visual mit mehreren Kennzahlen ersetzt.
 - [ ] DirectQuery: Abfragereduktion aktiv (Übernehmen-Schaltfläche für Slicer, Kreuzhervorhebung nur wo nötig), Antwortzeit
@@ -187,7 +187,7 @@ Ausgabe: Tabelle „Visual | Alt-Text | Zeichenzahl“.
 ```text
 Du bist Performance-Analyst*in für Power BI.
 Kontext: Export der Leistungsanalyse (JSON) bzw. Tabelle „Visual | DAX-Abfrage ms | Direkte Abfrage ms |
-Visualanzeige ms | Sonstiges ms“ der Seite [EINFÜGEN], Speichermodus [EINFÜGEN: Import / DirectQuery / gemischt].
+Visualanzeige ms | Sonstiges ms“ der Seite [EINFÜGEN: Seitenname], Speichermodus [EINFÜGEN: Import / DirectQuery / gemischt].
 Aufgabe: Nenne die fünf langsamsten Visuals, ordne jedem die Hauptursache zu und schlage je eine Maßnahme vor.
 Regeln: Trenne strikt zwischen DAX, Quelle und Darstellung. Keine Maßnahme ohne Bezug auf einen Messwert.
 Ausgabe: Tabelle „Visual | Gesamt ms | Hauptursache | Maßnahme | erwarteter Effekt (hoch/mittel/gering)“.
@@ -211,7 +211,7 @@ Ausgabe: Tabelle „Visual | Gesamt ms | Hauptursache | Maßnahme | erwarteter E
 
 ```text
 Du hilfst beim Test der Zeilensicherheit (RLS) eines Power-BI-Modells.
-Kontext: Rollendefinitionen aus dem TMDL (role …, tablePermission …): [EINFÜGEN]
+Kontext: Rollendefinitionen aus dem TMDL (role …, tablePermission …): [EINFÜGEN: TMDL-Ausschnitt]
 Fachliche Zuordnung: [EINFÜGEN: z. B. Regionalleitung sieht nur ihre Region, Bereichsleitung alles]
 Aufgabe: Erstelle eine Testmatrix „Rolle | Testkennung (Platzhalter, keine echten Namen) | erwartete Regionen |
 Prüf-Visual | erwartete Summe (leer zum Ausfüllen) | Testfall unerwarteter Wert“. Prüfe die DAX-Filter auf Lücken:
@@ -221,9 +221,9 @@ Ausgabe: Tabelle, danach Befunde zu den Filterausdrücken. Wenn Informationen fe
 
 ## 8 Veröffentlichen und Betrieb
 
-- [ ] Weg in die Produktion festgelegt: Bereitstellungspipeline (Entwicklung → Test → Produktion, Fabric-Kapazität nötig)
-      oder Git-Integration mit PBIP. Einschränkungen prüfen – laut Microsoft Learn unterstützen Bereitstellungspipelines
-      Berichte im PBIR-Format derzeit nicht.
+- [ ] Weg in die Produktion festgelegt: Bereitstellungspipeline (Entwicklung → Test → Produktion) oder Git-Integration
+      mit PBIP – beides braucht Fabric-Kapazität. Achtung: Laut Microsoft Learn (Stand 02.11.2026) unterstützen
+      Bereitstellungspipelines PBIR-Berichte nicht, obwohl PBIR inzwischen Standardformat ist – mit einem Testbericht prüfen.
 - [ ] **(manuell)** Nach dem Bereitstellen Modell im Ziel aktualisiert (Daten werden nicht kopiert); Zeitplan,
       Anmeldeinformationen, RLS-Mitglieder und Höherstufung im Ziel gesetzt (werden nicht übertragen).
 - [ ] **(manuell)** App aktualisiert („App aktualisieren“) – Publish und Bereitstellung ändern die App nicht. Wird ein
@@ -237,7 +237,7 @@ Ausgabe: Tabelle, danach Befunde zu den Filterausdrücken. Wenn Informationen fe
 
 ```text
 Du schreibst eine Änderungsnotiz für Nutzer eines Power-BI-Berichts im Produktionscontrolling.
-Kontext: Bericht [EINFÜGEN], Zielgruppe [EINFÜGEN], Änderungen laut Protokoll: [EINFÜGEN: Stichpunkte]
+Kontext: Bericht [EINFÜGEN: Name], Zielgruppe [EINFÜGEN: z. B. Regionalleitungen], Änderungen laut Protokoll: [EINFÜGEN: Stichpunkte]
 Aufgabe: Formuliere eine Nachricht (Teams oder E-Mail) mit Betreff, zwei Sätzen „Was ist neu“, Auswirkungen auf Zahlen
 (ändern sich Vormonate? warum?), was Nutzer tun müssen (z. B. Lesezeichen neu anlegen), Ansprechstelle (Funktion).
 Regeln: Sachlich, höchstens 120 Wörter, nur Änderungen aus dem Protokoll, Zahlen nur, wenn sie im Kontext stehen.
@@ -259,12 +259,13 @@ Ausführlich in [M1-13 · Modell KI-fähig machen](../prompts/modul1/M1-13_Model
 - [ ] **Verified answers** für die drei bis fünf häufigsten Fragen an passenden Visuals hinterlegt.
 - [ ] Nach Bereitstellung über Git oder Pipeline: Modell im Service aktualisiert, damit Schema und Instructions greifen.
 - [ ] **(manuell)** Modell im Service als **Approved for Copilot** markiert (gilt fürs Modell, nicht für Bericht oder App).
-      Wirkt v. a. auf den eigenständigen Copilot, den Microsoft bis Ende Januar 2027 einstellt; die Admin-Einschränkung
-      „nur freigegebene Elemente“ gilt laut Doku auch im neuen Microsoft Copilot in Power BI und Fabric (Preview).
+      Wirkt v. a. auf den eigenständigen Copilot, den Microsoft bis Ende Januar 2027 einstellt (ebenso Copilot in
+      Arbeitsbereichs-Apps; Copilot im Bericht bleibt); die Admin-Einschränkung „nur freigegebene Elemente“ gilt laut Doku
+      auch im neuen Microsoft Copilot in Power BI und Fabric (Preview).
 
 ```text
 Du kürzt Beschreibungen in einem Power-BI-Modell für Copilot.
-Kontext: Liste „Objekt | aktuelle Beschreibung“ (Abfrage 2/3 aus INFO_Abfragen.dax oder TMDL): [EINFÜGEN]; Glossar K05.
+Kontext: Liste „Objekt | aktuelle Beschreibung“ (Abfrage 2/3 aus INFO_Abfragen.dax oder TMDL): [EINFÜGEN: Liste]; Glossar K05.
 Aufgabe: Prüfe jede Beschreibung: Stehen fachliche Bedeutung, Einheit und wichtigste Einschränkung in den ersten
 200 Zeichen? Schreib eine neue Fassung, wo nicht.
 Regeln: Höchstens 200 Zeichen, Deutsch, Measure-Namen in eckigen Klammern. Keine Annahmen über Logik, die nicht in
@@ -291,19 +292,9 @@ Ausgabe: Tabelle „Objekt | alt (Zeichen) | neu | Zeichen“.
 
 Vier-Augen-Prinzip: Abschnitt 3 nicht von derselben Person prüfen lassen, die die Measures geschrieben hat.
 
-## Weiterführend (Microsoft Learn, geprüft am 18.11.2026)
+## Weiterführend (Microsoft Learn, geprüft am 22.11.2026)
 
-- Datenaktualisierung, Fehlerbenachrichtigung: https://learn.microsoft.com/power-bi/connect-data/refresh-data
-- Inkrementelle Aktualisierung: https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview
-- Modell für Copilot optimieren (200 Zeichen): https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data
-- Barrierefreie Berichte (mit Checkliste): https://learn.microsoft.com/power-bi/create-reports/desktop-accessibility-creating-reports
-- Leistungsanalyse: https://learn.microsoft.com/power-bi/create-reports/performance-analyzer
-- DirectQuery-Leitfaden: https://learn.microsoft.com/power-bi/guidance/directquery-model-guidance
-- Zeilensicherheit testen: https://learn.microsoft.com/fabric/security/service-admin-row-level-security
-- Vertraulichkeitsbezeichnungen: https://learn.microsoft.com/fabric/enterprise/powerbi/service-security-sensitivity-label-overview
-- Daten exportieren, Berichtseinstellung: https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-export-data
-- App veröffentlichen und aktualisieren: https://learn.microsoft.com/power-bi/collaborate-share/service-create-distribute-apps
-- Höherstufen und Zertifizieren: https://learn.microsoft.com/power-bi/collaborate-share/service-endorsement-overview
-- Bereitstellungspipelines (Ablauf, Einschränkungen): https://learn.microsoft.com/fabric/cicd/deployment-pipelines/understand-the-deployment-process
-- Prep data for AI, Approved for Copilot: https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai
-- Neuerungen November 2026 (Einstellung eigenständiger Copilot): https://learn.microsoft.com/power-bi/fundamentals/whats-new
+- Daten und Performance: [Datenaktualisierung](https://learn.microsoft.com/power-bi/connect-data/refresh-data) · [Geplante Aktualisierung, Fehlschläge](https://learn.microsoft.com/power-bi/connect-data/refresh-scheduled-refresh) · [Inkrementelle Aktualisierung](https://learn.microsoft.com/power-bi/connect-data/incremental-refresh-overview) · [Leistungsanalyse](https://learn.microsoft.com/power-bi/create-reports/performance-analyzer) · [DirectQuery-Leitfaden](https://learn.microsoft.com/power-bi/guidance/directquery-model-guidance)
+- Gestaltung und Sicherheit: [Barrierefreie Berichte (mit Checkliste)](https://learn.microsoft.com/power-bi/create-reports/desktop-accessibility-creating-reports) · [Zeilensicherheit testen](https://learn.microsoft.com/fabric/security/service-admin-row-level-security) · [Vertraulichkeitsbezeichnungen](https://learn.microsoft.com/fabric/enterprise/powerbi/service-security-sensitivity-label-overview) · [Daten exportieren, Berichtseinstellung](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-export-data)
+- Verteilen: [App veröffentlichen und aktualisieren](https://learn.microsoft.com/power-bi/collaborate-share/service-create-distribute-apps) · [Höherstufen und Zertifizieren](https://learn.microsoft.com/power-bi/collaborate-share/service-endorsement-overview) · [Bereitstellungspipelines (Ablauf, Einschränkungen)](https://learn.microsoft.com/fabric/cicd/deployment-pipelines/understand-the-deployment-process)
+- Copilot: [Voraussetzungen](https://learn.microsoft.com/power-bi/create-reports/copilot-introduction) · [Modell für Copilot optimieren (200 Zeichen)](https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data) · [Prep data for AI, Approved for Copilot](https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai) · [Neuerungen November 2026 (Einstellung eigenständiger Copilot)](https://learn.microsoft.com/power-bi/fundamentals/whats-new)

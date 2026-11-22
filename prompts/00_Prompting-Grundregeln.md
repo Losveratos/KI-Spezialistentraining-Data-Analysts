@@ -37,7 +37,7 @@ Alles andere errät es – und klingt dabei überzeugend.
 9. **Kontext wiederverwenden.** Wiederkehrende Regeln (Styleguide, Glossar, Arbeitsregeln) einmal als
    Datei im Copilot-Notebook hinterlegen statt in jeden Prompt zu kopieren → Ordner `kontext/`.
 10. **Datenschutz zuerst.** Nur im freigegebenen Unternehmens-Copilot arbeiten (Anmeldung mit
-    Unternehmenskonto, Schild-Symbol „Enterprise Data Protection“). Keine personenbezogenen Daten einfügen.
+    Unternehmenskonto, grünes Schild-Symbol für „Enterprise Data Protection“). Keine personenbezogenen Daten einfügen.
 
 ## Woran Sie Halluzinationen erkennen
 
@@ -59,7 +59,9 @@ Code in der DAX-Abfrageansicht testen, Zahlen gegen den Bericht abgleichen.
 | Daten analysieren, Kommentare, Korrelationen | Copilot in Excel oder Analyst-Agent* (rechnet tatsächlich) | Chat mit eingefügter Tabelle (nur für kleine Tabellen) |
 | Recherche (Microsoft-Doku, Best Practices) | Researcher-Agent* | Chat mit Websuche |
 
-\* nur, sofern in Ihrem Unternehmen freigeschaltet bzw. der Workspace auf einer Fabric-Kapazität liegt.
+\* Analyst und Researcher: mit Microsoft-365-Copilot-Lizenz, sofern der Admin sie nicht gesperrt hat. Copilot in der
+DAX-Abfrageansicht (Vorschau): nur mit Arbeitsbereich auf bezahlter Fabric-Kapazität (F2+) oder Premium-Kapazität (P1+) bzw.
+einer Fabric Copilot capacity – Testkapazität (Trial) und Premium-Einzelbenutzer (PPU) reichen nicht.
 
 ## Prompt-Gerüst zum Kopieren
 

@@ -16,8 +16,8 @@ mit exakten Namen, Datentypen, Beziehungen und DAX-Ausdrücken. Halluzinierte Sp
 dadurch selten, und Copilot kann Änderungen direkt als TMDL zurückgeben.
 
 **Wo finde ich es?**
-- Power BI Desktop → **TMDL-Ansicht** (linke Leiste): Objekte aus dem Datenbereich auf die Arbeitsfläche
-  ziehen → Skript entsteht → kopieren. Geänderte Skripte dort mit **Anwenden** zurückschreiben.
+- Power BI Desktop → **TMDL-Ansicht** (linke Leiste): Objekte aus dem Datenbereich in den Code-Editor
+  ziehen → Skript entsteht → kopieren. Geänderte Skripte dort erst mit **Vorschau** prüfen, dann mit **Anwenden** zurückschreiben.
 - PBIP-Projekt: Ordner `<Name>.SemanticModel/definition/` mit `model.tmdl`, `relationships.tmdl`,
   `tables/<Tabelle>.tmdl`.
 
@@ -71,13 +71,13 @@ relationship Fakt_Leistung_Region
 | `summarizeBy` | Standard-Aggregation | IDs, Jahre, Nummern: `none` |
 | `sortByColumn` | Sortierspalte | Name mit Leerzeichen in Anführungszeichen: `sortByColumn: 'Monat Nr'` |
 | `dataCategory` | Kategorie | Kalender als Datumstabelle: an der Tabelle `dataCategory: Time`, an der Datumsspalte `isKey` (einfacher: in Desktop „Als Datumstabelle markieren“) |
-| `lineageTag` | interne ID | **nicht** von Copilot erfinden lassen – bei neuen Objekten weglassen, Desktop vergibt sie |
+| `lineageTag` | interne ID | **nicht** von Copilot erfinden lassen – bei bestehenden Objekten unverändert lassen, bei neuen weglassen (Desktop bzw. die Codeaktion der TMDL-Ansicht ergänzt sie) |
 
 ## Stolperfallen beim Schreiben mit Copilot
 
 - **Einrückung** geht beim Kopieren aus dem Chat gern verloren (Leerzeichen statt Tabs). Die TMDL-Ansicht
   meldet dann einen Fehler beim Anwenden – Einrückung prüfen.
-- **Leerzeile** zwischen `///` und Objekt → Beschreibung geht verloren.
+- **Leerzeile** zwischen `///` und Objekt ist nicht erlaubt → je nach Version Parserfehler oder die Beschreibung geht verloren.
 - Copilot erfindet `lineageTag`-GUIDs oder Eigenschaften, die es nicht gibt. Regel im Prompt:
   „Keine lineageTags, nur Eigenschaften aus der Kurzreferenz.“
 - Eine Sortierspalte darf nicht aus der Spalte berechnet werden, die sie sortiert (Ringabhängigkeit).

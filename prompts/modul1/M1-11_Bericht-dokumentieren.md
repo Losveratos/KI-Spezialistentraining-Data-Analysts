@@ -23,7 +23,8 @@ Copilot verbindet das zu einer Seitendokumentation.
    anonymisierte Inhalte im unternehmensfreigegebenen Copilot verwenden.
 
 **Mit Kapazität (optional):** Copilot im Berichtsbereich von Power BI kann Seiten zusammenfassen und Fragen zu Visuals
-beantworten. Voraussetzung: Arbeitsbereich auf Fabric-/Premium-Kapazität und Copilot-Freigabe. Diese Zusammenfassung
+beantworten. Voraussetzung: Arbeitsbereich auf bezahlter Fabric-Kapazität (F2+) oder Premium-Kapazität (P1+), keine
+Testkapazität; der Admin hat Copilot nicht abgeschaltet. Diese Zusammenfassung
 beschreibt Inhalte und Zahlen, ersetzt aber keine technische Doku (Felder, Filter, Definitionen).
 
 ## Prompt

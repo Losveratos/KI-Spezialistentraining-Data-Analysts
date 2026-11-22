@@ -67,5 +67,5 @@ markiere den Verweis als „nicht gefunden“.
 - Copilot prüft sich selbst nachsichtig. Darum neuer Chat und Metadaten als „maßgeblich“ deklarieren.
 - Ähnliche Namen sind die gefährlichsten Halluzinationen: `[Qualitätsquote]` statt `[m_QQ]`, `Kalender[Monat]` (Text) statt `Kalender[Datum]`.
 - Neue DAX-Funktionen kennt Copilot oft nicht und erklärt sie falsch; im Zweifel in der DAX-Referenz auf Microsoft Learn nachsehen.
-- Copilot in der DAX-Abfrageansicht (nur mit Fabric-/Premium-Kapazität) prüft die Syntax mit einem DAX-Parser – fachliche
-  Fehler findet aber auch er nicht.
+- Copilot in der DAX-Abfrageansicht (nur mit bezahlter Fabric-/Premium-Kapazität, siehe M1-03) prüft die Syntax mit einem
+  DAX-Parser – fachliche Fehler findet aber auch er nicht.

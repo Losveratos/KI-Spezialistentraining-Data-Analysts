@@ -14,7 +14,7 @@ muss er fünf Fragen bestehen. Copilot hilft, Gegenargumente systematisch zu sam
 | Frage | Prüfung | Typischer Befund |
 |---|---|---|
 | 1. Ist er **stabil**? | Pearson vs. Spearman, mit/ohne Ausreißer, je Region | Kommafehler erzeugt Scheinzusammenhang |
-| 2. Ist er **groß genug für n**? | n ≈ 22 je Region → erst ab \|r\| ≈ 0,42 belastbar; wenige Extremmonate prüfen | 4 auffällige Monate tragen die ganze Korrelation |
+| 2. Ist er **groß genug für n**? | n ≈ 22 je Region → erst ab \|r\| ≈ 0,42 von Zufall unterscheidbar (5 %); wenige Extremmonate prüfen | 4 auffällige Monate tragen die ganze Korrelation |
 | 3. Gibt es eine **Drittvariable**? | Saison, Trend, Regionsgröße, Leistungsmix | Winterdienst-Kosten ↔ Krankenquote: beide winterhoch |
 | 4. Stimmt die **zeitliche Reihenfolge**? | Lag-Analyse: Ursache muss vor oder gleichzeitig mit Wirkung auftreten | Qualität fällt 1 Monat nach Krankenstand |
 | 5. Gibt es einen **fachlichen Mechanismus**? | Plausible Kette, die der Fachbereich bestätigen kann | Krankheit → Überstunden/Einspringer → Qualität ↓, Kosten ↑ |
@@ -37,8 +37,8 @@ bevor sie in einen Managementkommentar gehen. Deine Rolle: Gegenargumente finden
 Kontext:
 - Monatsdaten je Region, Jan 2025 – Okt 2026, also n ≈ 22 je Region (bei Lag 1: 21).
 - Bekannte Datenfehler: [EINFÜGEN: Funde aus M2-03]
-- Bekannte Saison: Winterdienst hat Stunden/Kosten fast nur Dez–Feb; Krankenquoten sind in Jan/Feb
-  in allen Regionen höher.
+- Bekannte Saison: Winterdienst hat Stunden/Kosten vor allem Dez–Feb und nahezu keine von Mai bis September;
+  Krankenquoten sind in Jan/Feb in allen Regionen höher.
 - Ergebnisse der Korrelationsanalyse: [EINFÜGEN: Tabelle aus M2-06 oder Verweis auf Ergebnis oben]
 
 Aufgabe: Bewerte jede der folgenden Korrelationen mit dem Raster unten.
@@ -109,8 +109,8 @@ Wo wird Korrelation als Ursache dargestellt, wo fehlt eine Drittvariable, wo ist
 - [ ] Gerechnete Tests sind mit Code oder Rechenweg belegt; nicht gerechnete als solche markiert.
 
 ## Stolperfallen
-- **Hohe Korrelation ≠ belastbar.** Bei Monatsreihen erzeugen Saison und Trend leicht |r| > 0,7, ohne dass ein
-  Zusammenhang besteht. Immer saisonbereinigt oder gegen Vorjahresmonat prüfen.
+- **Hohe Korrelation ≠ belastbar.** Bei Monatsreihen erzeugen Saison und Trend leicht |r| > 0,7, ohne dass die
+  beiden Kennzahlen einander beeinflussen. Immer saisonbereinigt oder gegen Vorjahresmonat prüfen.
 - **„Signifikant“ wird überinterpretiert.** Ein p-Wert sagt nichts über die Ursache und bei vielen Tests wenig
   über Zufall. Wiederholung in mehreren Regionen ist das stärkere Argument.
 - **Copilot bestätigt gern.** Wer fragt „Ist das ein Zusammenhang?“, bekommt meist „Ja“. Fragen Sie nach

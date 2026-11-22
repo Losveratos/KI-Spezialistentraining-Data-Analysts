@@ -5,11 +5,12 @@
 | 2 | M365 Copilot Chat oder Notebook (mit K04/K05); Variante: Copilot im Power-BI-Bericht* | Ü2.3 | 20 min |
 
 \* Copilot im Bericht (Copilot-Bereich „Zusammenfassen“ bzw. Visual **Narrative/Erzählung** mit Copilot)
-braucht einen Workspace auf **bezahlter Fabric-Kapazität oder Power BI Premium (P1+)**, die Freigabe durch
-den Fabric-Admin (Mandanteneinstellung) und eine unterstützte Region; Trial-Kapazitäten werden nicht
-unterstützt. Für das Narrative-Visual brauchen Sie Bearbeitungsrechte. Er fasst nur zusammen, **was auf der
-Berichtsseite sichtbar ist**, nicht das Modell – und er kennt weder Ihren Kommentar-Leitfaden noch Datenfehler.
-Der Weg über M365 Copilot Chat unten funktioniert ohne Kapazität.
+braucht einen Arbeitsbereich auf **bezahlter Fabric-Kapazität (ab F2) oder Power BI Premium (ab P1)**, die Freigabe
+durch den Fabric-Admin (Mandanteneinstellung) und eine unterstützte Region; Testkapazitäten (Trial) werden nicht
+unterstützt. Für das Narrative-Visual brauchen Sie Bearbeitungsrechte. Die Zusammenfassung stützt sich auf das,
+**was die Visuals des Berichts zeigen** (standardmäßig alle sichtbaren Seiten, höchstens die 20 relevantesten
+Visuals, Tabellen nur bis 100 Zeilen), nicht auf das ganze Modell – und sie kennt weder Ihren Kommentar-Leitfaden
+noch Datenfehler. Der Weg über M365 Copilot Chat unten funktioniert ohne Kapazität.
 
 ## Wofür
 Die Kennzahlenübersicht braucht jeden Monat drei bis sechs Sätze: Wo stehen wir, was weicht ab, warum,
@@ -21,7 +22,7 @@ Zahlen bleibt bei Ihnen.
 - Daten: `KPI_Monat_Region.csv` anhängen (Copilot braucht Vormonate und Vorjahresmonat für Vergleiche)
   oder Export der Tabelle „je Region“ aus der Kennzahlenübersicht, Slicer Monat = 2026-10.
 - Kontext: **K04** (Kommentar-Leitfaden) und **K05** (Kennzahlen-Glossar) im Notebook hinterlegen oder anhängen.
-- Szenario-Kürzel nach IBCS: **IST** (Actual), **PL** (Plan), **VJ** (Vorjahr), **ΔPL**, **ΔVJ**.
+- Szenario-Kürzel wie in K04 (angelehnt an IBCS: AC/PL/PY): **IST**, **PL** (Plan), **VJ** (Vorjahr), **ΔPL**, **ΔVJ**.
 
 > **Datenschutz:** Nur im unternehmensfreigegebenen Microsoft 365 Copilot (Enterprise Data Protection).
 > Keine personenbezogenen Daten. Bei echten Berichten keine Namen von Verantwortlichen in den Kommentar –
@@ -39,8 +40,8 @@ Kontext:
 - Bekannte Datenfehler (nicht kommentieren, sondern als Datenhinweis nennen):
   [EINFÜGEN: Funde aus dem Plausibilitätscheck, z. B. „Südwest Sep 2026 Ist_Kosten Fahrzeugreinigung ca. × 10
   (Kommafehler)“, „Nord Mai 2026 Bahnhofsreinigung doppelt geladen“]
-- Schwellen: Kostenabweichung ab ±3 % kommentieren, ab +5 % kritisch; Qualitätsquote unter 90 % kritisch;
-  Krankenquote über 8 % beobachten. [EINFÜGEN: eigene Schwellen oder „siehe K04“]
+- Schwellen: Kostenabweichung ab ±2 % kommentieren, ab +5 % kritisch; Qualitätsquote unter 90 % kritisch;
+  Krankenquote über 8 % beobachten. [EINFÜGEN: eigene Schwellen oder „siehe K04/K05“]
 - Halte dich an den Kommentar-Leitfaden (K04) und das Kennzahlen-Glossar (K05), sofern angehängt.
 
 Aufgabe: Schreib einen Kommentarvorschlag für Oktober 2026.
@@ -109,9 +110,9 @@ bekannten Datenfehler. Nenne beide Werte und welcher Wert im Bericht steht.
 
 ## Stolperfallen
 - **Prozent vs. Prozentpunkte.** Bei Quoten verwechselt Copilot das häufig. Im Prompt ausdrücklich verlangen.
-- **Copilot im Bericht rechnet auf der sichtbaren Seite.** Ist der Slicer auf „2026-10“, sieht das Narrative-
-  Visual keine Vormonate – Zeitvergleiche erfindet es dann oder lässt sie weg. Es aktualisiert sich nicht
-  automatisch bei Filterwechsel (Aktualisieren-Schaltfläche).
+- **Copilot im Bericht fasst zusammen, was die Visuals zeigen.** Steht der Slicer auf „2026-10“ und zeigt kein
+  Visual Vormonate, fehlen sie auch dem Narrative-Visual – Zeitvergleiche erfindet es dann oder lässt sie weg.
+  Es aktualisiert sich nicht automatisch bei Filterwechsel (Aktualisieren-Schaltfläche).
 - **„KPI Status Text“ ist kein Kommentar.** Das Measure liefert nur ein Etikett (kritisch/beobachten/…), mit
   festen Schwellen im Code. Copilot übernimmt es gern als Begründung – es ist aber selbst nur eine Regel.
 - **Glatte Zahlen misstrauen.** „Rund 10 %“ oder „etwa 1 Mio. €“ ohne Beleg sind oft geschätzt. Nachfragen.

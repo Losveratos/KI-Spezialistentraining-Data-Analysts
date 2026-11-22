@@ -4,10 +4,10 @@
 |---|---|---|---|
 | 2 | Copilot in Excel mit Python*, Analyst* oder M365 Copilot Chat mit Datei | Ü2.5 | 20 min |
 
-\* **Copilot in Excel mit Python** (z. B. über „Mit Copilot bearbeiten“ bzw. erweiterte Analyse) schreibt
-Python-Code in die Arbeitsmappe und führt ihn aus – Ergebnisse sind nachrechenbar. Voraussetzung:
-Microsoft-365-Copilot-Lizenz und Python in Excel im Mandanten freigegeben; die Datei sollte in OneDrive/SharePoint
-liegen. **Analyst** (Agent in Copilot Chat) rechnet ebenfalls mit Python und zeigt die Schritte. Steht beides nicht
+\* **Copilot in Excel mit Python** – über „Mit Copilot bearbeiten“ (Edit with Copilot, bis Anfang 2026 „Agent Mode“;
+Python dort seit August 2026) schreibt Python-Code in die Arbeitsmappe und führt ihn aus; die Ergebnisse sind
+nachrechenbar. Voraussetzung: Microsoft-365-Copilot-Lizenz und Python in Excel im Mandanten freigegeben; die Datei
+sollte in OneDrive/SharePoint liegen. **Analyst** (Agent in Copilot Chat) rechnet ebenfalls mit Python und zeigt die Schritte. Steht beides nicht
 zur Verfügung: Variante C unten (Chat liefert die Rechenvorschrift, Excel rechnet mit `KORREL`).
 
 ## Wofür
@@ -17,13 +17,15 @@ Wichtig: Copilot darf Korrelationen nicht „schätzen“. Er muss sie rechnen, 
 
 ## Statistik in fünf Sätzen
 - **Pearson r** misst den linearen Zusammenhang (−1 bis +1). Ein einzelner Ausreißer kann r stark verzerren.
-- **Spearman ρ** rechnet mit Rängen und ist robust gegen Ausreißer und nicht lineare, aber gleichgerichtete Verläufe.
-  Weichen Pearson und Spearman stark voneinander ab, steckt meist ein Ausreißer dahinter.
+- **Spearman ρ** rechnet mit Rängen, ist robuster gegen Ausreißer und erfasst auch nicht lineare, aber monotone
+  Verläufe. Weichen Pearson und Spearman stark voneinander ab, steckt oft ein Ausreißer dahinter.
 - **Stichprobengröße:** Je Region gibt es 22 Monatswerte. Bei n = 22 ist erst ab etwa |r| ≥ 0,42 ein Zusammenhang
-  statistisch von null unterscheidbar (5 %-Niveau, zweiseitig) – und Monatsreihen mit Trend oder Saison
-  überschätzen das noch. Wenige extreme Monate können eine hohe Korrelation allein erzeugen.
-- **Zeitversatz (Lag):** Lag 1 heißt: Wert A im Monat t gegen Wert B im Monat t+1. Steigt r bei Lag 1 deutlich
-  gegenüber Lag 0, folgt B zeitlich auf A. Jeder Lag kostet einen Datenpunkt.
+  statistisch von null unterscheidbar (5 %-Niveau, zweiseitig). Monatsreihen mit Trend oder Saison sind nicht
+  unabhängig – dort liegt die Schwelle faktisch höher. Wenige extreme Monate können eine hohe Korrelation allein
+  erzeugen. „Signifikant“ heißt nur: kaum durch Zufall erklärbar – nicht stark, nicht ursächlich.
+- **Zeitversatz (Lag):** Lag 1 heißt: Wert A im Monat t gegen Wert B im Monat t+1. Ist |r| bei Lag 1 deutlich
+  größer als bei Lag 0, ist das ein Hinweis (kein Beweis), dass B zeitlich auf A folgt. Jeder Lag kostet einen
+  Datenpunkt (Lag 1: n = 21, Schwelle ≈ 0,43).
 - **Gepoolt vs. je Region:** Alle Regionen zusammen (154 Zeilen) erhöhen n, mischen aber Niveauunterschiede
   zwischen Regionen hinein. Immer auch je Region rechnen.
 
@@ -110,8 +112,9 @@ auf Pearson r (r mit und ohne den jeweiligen Punkt).
 - [ ] Code ist sichtbar und läuft; n stimmt (gepoolt 154, je Region 22, bei Lag 1 je Region 21).
 - [ ] Eine Korrelation in Excel nachgerechnet (`KORREL`) – Abweichung höchstens in der dritten Nachkommastelle.
 - [ ] **Ost**: Krankenquote → Qualitätsquote ist bei **Lag 1** stärker (negativ) als bei Lag 0 (Übungsdaten).
-- [ ] **Winterdienst-Kosten ↔ Krankenquote** ist je Region stark positiv (außer Ost), fällt aber bei
-      Saisonbereinigung oder ohne Wintermonate auf nahe null (Scheinkorrelation).
+- [ ] **Winterdienst-Kosten ↔ Krankenquote** ist je Region stark positiv (r ≈ 0,85–0,88, außer Ost). Ohne
+      Wintermonate bleibt |r| < 0,3, saisonbereinigt gepoolt ≈ 0 und je Region ohne einheitliches Vorzeichen
+      (Scheinkorrelation).
 - [ ] **Abw_Kosten_Prozent ↔ Kosten_je_Stunde gepoolt**: Pearson fast 1, Spearman nahe 0 – ein einziger Punkt
       (Südwest, Sep 2026, Kommafehler) erzeugt die „Korrelation“. Ohne ihn bricht Pearson ein.
 - [ ] Ohne den Kommafehler werden gepoolt echte Zusammenhänge sichtbar, die er vorher überdeckt hat
@@ -121,8 +124,9 @@ auf Pearson r (r mit und ohne den jeweiligen Punkt).
 ## Stolperfallen
 - **Geschätzte statt gerechnete Werte.** Ohne Codeausführung erfindet Copilot plausible r-Werte. Fehlt der Code,
   Ergebnis verwerfen.
-- **Matrix ohne n und p.** 7 Kennzahlen = 21 Paare, × 7 Regionen = 147 Tests – bei 5 % Irrtum sind rund 7
-  „signifikante“ Paare reiner Zufall. Nur Paare mit fachlichem Sinn und Wiederholung über Regionen ernst nehmen.
-- **Anteile vs. Prozent gemischt** (0,07 vs. 7) ändern r nicht, aber jede Interpretation von Steigungen.
+- **Matrix ohne n und p.** 7 Kennzahlen = 21 Paare, × 7 Regionen = 147 Tests – bei 5 % Irrtum sind im Mittel
+  rund 7 „signifikante“ Paare reiner Zufall. Nur Paare mit fachlichem Sinn und Wiederholung über Regionen ernst nehmen.
+- **Anteile statt Prozent** (0,07 statt 7) ändern r nicht, solange eine Spalte einheitlich skaliert ist – wohl
+  aber jede Interpretation von Steigungen.
 - **Lag in die falsche Richtung.** `shift(1)` verschiebt nach unten: Prüfen Sie an zwei Zeilen, ob wirklich
   Krankenquote Juli neben Qualitätsquote August steht.

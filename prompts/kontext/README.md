@@ -19,9 +19,9 @@ Referenzen hinzufügen und dann im Notebook-Chat arbeiten. Copilot bezieht die R
 Antwort ein. Je Thema ein Notebook (Entwicklung / Kommentierung) hält die Kontexte sauber getrennt.
 
 **2. Anhängen im Einzelchat**
-Datei über die Büroklammer anhängen und im Prompt darauf verweisen („Halte dich an K02“). Wird die
-Dateiendung `.md` nicht angenommen, die Datei als `.txt` speichern oder den Inhalt in ein Word-Dokument
-kopieren und dieses (aus OneDrive) anhängen.
+Datei über das Plus-Symbol (**+**, je nach Version Büroklammer) anhängen und im Prompt darauf verweisen („Halte dich an
+K02“). Wird die Dateiendung `.md` nicht angenommen (im Chat oder als Notebook-Referenz), die Datei als `.txt` speichern oder
+den Inhalt in ein Word-Dokument kopieren und dieses (aus OneDrive) anhängen.
 
 **3. Einfügen**
 Inhalt (ab der Linie `---`) an den Anfang des Chats kopieren mit: „Halte dich in diesem Chat an folgende

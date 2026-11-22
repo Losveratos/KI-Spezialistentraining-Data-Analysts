@@ -4,10 +4,10 @@
 |---|---|---|---|
 | 2 | M365 Copilot Chat + DAX-Abfrageansicht (Power BI Desktop); optional Copilot in der DAX-Abfrageansicht* | Ü2.1 | 10 min |
 
-\* Copilot direkt in der DAX-Abfrageansicht braucht einen Workspace auf **bezahlter Fabric-Kapazität (ab F2)
-oder Power BI Premium (ab P1)**, Copilot muss vom Fabric-Admin freigegeben sein, Testkapazitäten (Trial)
-werden nicht unterstützt. In Desktop ggf. unter *Optionen › Vorschaufeatures* „DAX query view with Copilot“
-aktivieren. Ist das nicht gegeben, nehmen Sie den Weg über M365 Copilot Chat (unten) – er funktioniert immer.
+\* Copilot direkt in der DAX-Abfrageansicht braucht einen Arbeitsbereich auf **bezahlter Fabric-Kapazität (ab F2)
+oder Power BI Premium (ab P1)** und die Freigabe durch den Fabric-Admin; Testkapazitäten (Trial) werden nicht
+unterstützt. In Desktop unter *Optionen › Vorschaufeatures* „DAX query view with Copilot“ aktivieren. Ist das
+nicht gegeben, nehmen Sie den Weg über M365 Copilot Chat (unten) – er funktioniert immer.
 
 ## Wofür
 Ein Visual-Export liefert nur, was auf der Seite steht. Eine DAX-Abfrage liefert genau die Kennzahlen,
@@ -117,7 +117,8 @@ mit CALCULATE ( [Ist Kosten], DATESYTD ( Kalender[Datum] ) ).
   ID-Spalten im Modell summierbar. Immer nach `Region[Region]` gruppieren.
 - **Formatstrings fehlen im Raster.** Die DAX-Abfrageansicht zeigt Rohwerte. Wer kopiert, muss Prozent
   selbst formatieren – oder Copilot im Prompt sagen, dass es Anteile sind.
-- **Copilot in der DAX-Abfrageansicht sieht nur Metadaten** (Tabellen, Spalten, Measures, bis zu 200 Zeichen
-  Beschreibung). Er kennt Ihre Daten nicht und kann `m_QQ` ohne Beschreibung nicht deuten (F2, F5).
+- **Copilot in der DAX-Abfrageansicht sieht nur Metadaten** (Tabellen, Spalten, Measures, die ersten 200 Zeichen
+  jeder Beschreibung; im Import-Modus höchstens Min/Max als Beispielwerte). Er kennt Ihre Daten nicht und kann
+  `m_QQ` ohne Beschreibung nicht deuten (vgl. Befunde aus Ü1.1: kryptische Namen, fehlende Beschreibungen).
 - **Monat als Text.** `Kalender[Monat]` ist Text („2026-10“) und sortiert dadurch richtig. `Monatsname`
   („Oktober“) sortiert ohne Sortierspalte alphabetisch – für Zeitreihen ungeeignet.

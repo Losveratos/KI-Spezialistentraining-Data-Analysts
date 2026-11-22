@@ -12,7 +12,8 @@ mit Beleg aus dem TMDL. Das ist die Grundlage für alle weiteren Prompts in Modu
 ## Vorbereitung
 - Power BI Desktop › **TMDL-Ansicht** (linke Leiste). Im Datenbereich die Tabellen `Fakt_Leistung`, `Kalender`,
   `Region`, `Leistungsart`, `Massnahmen` mit gedrückter **Strg**-Taste markieren und in den Editor ziehen
-  (oder Rechtsklick › TMDL skripten › Zwischenablage). Beziehungen ebenso aus dem Bereich **Beziehungen** ziehen.
+  (oder Rechtsklick › **Skript TMDL**, engl. *Script TMDL to* › Zwischenablage). Beziehungen ebenso aus dem Bereich
+  **Beziehungen** ziehen.
 - **Daten nicht mitkopieren:** Die Daten des Übungsmodells stecken in den Ausdrücken `Daten_Fakt_Leistung` und
   `Daten_Massnahmen` (Bereich **Ausdrücke**). Beim Skripten einzelner Tabellen sind sie nicht dabei. Skripten Sie das
   ganze Modell, löschen Sie die `expression Daten_…`-Blöcke aus der Kopie (nicht anwenden!) – sie sprengen sonst das

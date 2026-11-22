@@ -81,7 +81,7 @@ Rechne für die gefundenen Datenfehler die betroffenen Kennzahlen zweimal: wie g
 für den betroffenen Monat und für das laufende Jahr (Jan–Okt 2026).
 ```
 
-Gegenprobe im Modell (DAX-Abfrageansicht, ohne Copilot):
+Gegenprobe im Modell (Abfrage schreiben lassen, selbst in der DAX-Abfrageansicht ausführen):
 ```text
 Schreib eine DAX-Abfrage, die für Fakt_Leistung je Monat, RegionID und LeistungsartID die Anzahl Zeilen
 und Ist_Kosten / Ist_Stunden ausgibt und nur Zeilen mit Anzahl > 1 oder Kosten je Stunde über dem

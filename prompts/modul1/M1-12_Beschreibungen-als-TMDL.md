@@ -2,7 +2,7 @@
 
 | Modul | Werkzeug | Übung | Dauer |
 |---|---|---|---|
-| 1 | M365 Copilot Chat oder Notebook + TMDL-Ansicht (alternativ „Mit Copilot erstellen“ in der Modellansicht, sofern Kapazität vorhanden) | Ü1.11 | 10 min |
+| 1 | M365 Copilot Chat oder Notebook + TMDL-Ansicht (alternativ „Erstellen mit Copilot“ in der Modellansicht, sofern Kapazität vorhanden) | Ü1.11 | 10 min |
 
 ## Wofür
 Beschreibungen sind Metadaten, die jede KI liest: Copilot in Power BI (DAX-Abfrageansicht nutzt die ersten 200 Zeichen),
@@ -18,9 +18,10 @@ und gibt sie als **TMDL-Skript** zurück, das Sie in der TMDL-Ansicht anwenden �
   Desktop passt dann DAX-Verweise und Visuals an. Ein umbenanntes Measure im `createOrReplace`-Skript legt dagegen ein
   **neues** Measure an, Visuals verlieren das alte.
 - Datenschutz: nur Metadaten und Glossar; unternehmensfreigegebenen Copilot nutzen.
-- **Variante Copilot in Power BI:** Modellansicht › Measure markieren › Eigenschaften › Beschreibung › **Mit Copilot erstellen**.
-  Erzeugt die Beschreibung aus dem DAX (ohne Kommentare und Texte in Anführungszeichen), nur je Measure, nur mit
-  Fabric-/Premium-Kapazität. Fachliche Bedeutung kennt diese Variante nicht – das Glossar schon.
+- **Variante Copilot in Power BI:** Modellansicht › Measure markieren › Eigenschaften › Beschreibung › **Erstellen mit Copilot**
+  (engl. *Create with Copilot*). Erzeugt die Beschreibung aus dem DAX (ohne Kommentare und Texte in Anführungszeichen), nur
+  je Measure, nur mit bezahlter Fabric-Kapazität (F2+) oder Premium-Kapazität (P1+) bzw. Fabric Copilot capacity – keine
+  Testkapazität. Fachliche Bedeutung kennt diese Variante nicht – das Glossar schon.
 
 ## Prompt
 ```text
@@ -66,7 +67,7 @@ Mach dasselbe für dieses Skript mit Spalten und Tabellen: [EINFÜGEN: Skript]. 
 
 ## Ergebnis prüfen
 - [ ] Vor dem Anwenden: Skript mit dem Original vergleichen – nur `///`-Zeilen dürfen neu sein (z. B. in VS Code: Vergleich zweier Dateien).
-- [ ] TMDL-Ansicht › **Anwenden** › Bereich **Probleme** leer, Bereich **Ausgabe** meldet Erfolg.
+- [ ] TMDL-Ansicht › **Vorschau** zeigt nur die neuen Beschreibungen › **Anwenden** › Bereich **Probleme** leer, Erfolgsmeldung erscheint.
 - [ ] Stichprobe in der Modellansicht: Beschreibung erscheint im Eigenschaftenbereich und als Tooltip im Datenbereich.
 - [ ] Bericht und Measures funktionieren unverändert (Seite Kennzahlenübersicht öffnen).
 - [ ] Beschreibungen fachlich gegengelesen – besonders Schwellen und Einheiten (8 %, 90 %, €).
@@ -74,9 +75,10 @@ Mach dasselbe für dieses Skript mit Spalten und Tabellen: [EINFÜGEN: Skript]. 
 
 ## Stolperfallen
 - Leerzeichen statt Tabs nach dem Kopieren aus dem Chat: Die TMDL-Ansicht lehnt das Skript ab. Notfalls im Editor Strg+H, Regex.
-- Eine Leerzeile zwischen `///` und `measure` lässt die Beschreibung verschwinden – ohne Fehlermeldung.
+- Eine Leerzeile zwischen `///` und `measure` ist nicht erlaubt: Je nach Version meldet die TMDL-Ansicht einen Fehler, oder
+  die Beschreibung verschwindet ohne Meldung.
 - `createOrReplace` ersetzt das ganze Objekt. Fehlt im zurückgegebenen Skript eine Eigenschaft (z. B. `formatString`), ist sie danach weg.
 - **Synonyme** gehören nicht ins TMDL-Measure, sondern ins linguistische Schema (Modellansicht › Eigenschaften › Synonyme, bzw.
-  Q&A-Einrichtung). Q&A unterstützt offiziell nur Englisch und wird laut Microsoft im Februar 2027 eingestellt; in einem
+  Q&A-Einrichtung). Q&A unterstützt offiziell nur Englisch (Spanisch als Vorschau) und wird laut Microsoft im Februar 2027 eingestellt; in einem
   de-DE-Modell ist das Feld daher evtl. nicht nutzbar. Robuster Weg: Synonyme als Begriffsliste in die **AI-Instructions**
   (M1-13) und ins Glossar übernehmen.

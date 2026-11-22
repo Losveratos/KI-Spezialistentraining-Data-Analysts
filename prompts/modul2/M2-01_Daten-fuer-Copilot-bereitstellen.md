@@ -14,8 +14,9 @@ mit dem Copilot **zuerst bestätigt, was er bekommen hat**, bevor er irgendetwas
 **Weg A – Visual-Export (schnell, für eine Berichtsseite)**
 - Power BI Desktop: Visual markieren › **Weitere Optionen (…)** › **Daten exportieren** › CSV speichern.
   Desktop exportiert nur *zusammengefasste* Daten als CSV, maximal 30.000 Zeilen, ohne Summenzeilen.
-- Power BI Service: zusätzlich `.xlsx` (bis 150.000 Zeilen) oder `.xlsx` mit Liveverbindung (bis 500.000 Zeilen).
-  Die erste Zeile der Excel-Datei nennt die angewendeten Filter – gut als Kontext für Copilot.
+- Power BI Service: zusätzlich `.xlsx` (bis 150.000 Zeilen; bei „Daten mit aktuellem Layout“ zählen Zellen) oder
+  `.xlsx` mit Liveverbindung (bis 500.000 Zeilen). Die erste Zeile der Excel-Datei nennt die angewendeten Filter –
+  gut als Kontext für Copilot. Was angeboten wird, hängt von Berichts- und Admin-Einstellungen ab.
 - Achtung: Die Spaltennamen im Export sind die Feldnamen des Visuals (z. B. `m_QQ`), nicht sprechende Namen.
 
 **Weg B – DAX-Abfrage (genau, reproduzierbar, für mehrere Kennzahlen)** → siehe **M2-02**.
@@ -31,14 +32,14 @@ Ergebnisraster in der DAX-Abfrageansicht › **Kopieren** kopiert die ganze Tabe
 - Die Exporte enthalten absichtlich dieselben Datenfehler wie der Bericht.
 
 **Wohin mit den Daten?**
-- **Datei anhängen** (Büroklammer im Copilot Chat) – bevorzugt für CSV/XLSX, Copilot kann damit rechnen.
+- **Datei anhängen** (Büroklammer bzw. „+“ im Copilot Chat) – bevorzugt für CSV/XLSX, Copilot kann damit rechnen.
 - **Einfügen** in den Prompt – nur für kleine Tabellen (Faustregel: < 100 Zeilen, < 15 Spalten).
 - **Copilot Notebook**: Export + Kontextdateien **K04** (Kommentar-Leitfaden) und **K05** (Kennzahlen-Glossar)
   als Referenzen hinterlegen. Dann müssen Sie Regeln und Begriffe nicht in jeden Prompt kopieren.
 
 > **Datenschutz:** Nur im unternehmensfreigegebenen Microsoft 365 Copilot arbeiten (Anmeldung mit
 > Firmenkonto, Hinweis „Enterprise Data Protection“ sichtbar). Keine personenbezogenen Daten einfügen
-> oder anhängen. Angehängte Dateien werden von DLP-Richtlinien nicht inhaltlich geprüft – die
+> oder anhängen. DLP-Richtlinien prüfen nur den getippten Prompt, nicht den Inhalt hochgeladener Dateien – die
 > Verantwortung liegt bei Ihnen. Exporte aus echten Berichten nur, wenn sie für diesen Zweck freigegeben sind.
 
 ## Prompt

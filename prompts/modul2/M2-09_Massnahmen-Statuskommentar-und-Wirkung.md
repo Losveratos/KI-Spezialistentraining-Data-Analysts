@@ -10,8 +10,9 @@ Ohne Analyst: normaler Copilot Chat mit angehängten Dateien, Zahlen anschließe
 ## Wofür
 Das Maßnahmentracking beantwortet zwei Fragen: **Wo stehen die Maßnahmen?** (Status, Termine, Einsparung)
 und **Wirken sie?** (Zeigen die Kennzahlen eine Veränderung nach Abschluss?). Die zweite Frage ist die
-wertvollere – und die, bei der Copilot am leichtesten zu viel behauptet. Eine Wirkung ist erst belegt, wenn
-Vorher/Nachher, Vorjahr und eine Vergleichsgruppe dasselbe Bild zeigen.
+wertvollere – und die, bei der Copilot am leichtesten zu viel behauptet. Eine Wirkung gilt erst als gestützt,
+wenn der Vorher/Nachher-Unterschied bestehen bleibt, nachdem Saison (Vorjahresvergleich) und allgemeine
+Entwicklung (Vergleichsgruppe) herausgerechnet sind.
 
 ## Vorbereitung
 - Konsistenzcheck (M2-08) erledigt; Verstöße und Rückfragen liegen vor.
@@ -38,7 +39,8 @@ Aufgabe A – Status:
 2. Nenne verzögerte und überfällige Maßnahmen mit Region, Leistungsart und Zieltermin.
 
 Aufgabe B – Wirkung der Maßnahme [EINFÜGEN: z. B. M-004]:
-1. Lies aus Datei 1 Region, Leistungsart und Abschlussdatum.
+1. Lies aus Datei 1 Region, Leistungsart und Abschlussdatum (kein eigenes Feld: bei Status „abgeschlossen“ den
+   Zieltermin nehmen, Spalte Kommentar beachten).
 2. Vergleiche in Datei 2 für diese Region und Leistungsart die Mittelwerte von Produktivitaet, Ist_Stunden,
    Leistungseinheiten und Ist_Kosten: 4 Monate vor Abschluss vs. alle Monate nach Abschluss bis Okt 2026.
 3. Kontrolle Saison: dieselben Kalendermonate im Vorjahr (2025) vergleichen.
@@ -50,8 +52,8 @@ Aufgabe B – Wirkung der Maßnahme [EINFÜGEN: z. B. M-004]:
 
 Regeln:
 - Rechne tatsächlich (Analysewerkzeug), zeig die Rechenschritte. Keine geschätzten Zahlen.
-- Wirkung nur „belegt“ nennen, wenn Vorher/Nachher, Vorjahr und Vergleichsgruppe in dieselbe Richtung zeigen;
-  sonst „Hinweis auf Wirkung“ oder „keine Wirkung erkennbar“.
+- Wirkung nur „belegt“ nennen, wenn der Vorher/Nachher-Unterschied nach Abzug von Vorjahreseffekt (Saison) und
+  Vergleichsgruppe deutlich bestehen bleibt; sonst „Hinweis auf Wirkung“ oder „keine Wirkung erkennbar“.
 - Maßnahmen mit Konsistenzverstößen nicht als Erfolg zählen, sondern mit Datenvorbehalt nennen.
 - Positive Entwicklungen genauso nüchtern formulieren wie negative.
 - Wenn Informationen fehlen, frag nach statt zu raten.

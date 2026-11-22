@@ -17,7 +17,7 @@
 6. **Massenänderungen sind die Stärke:** Beschreibungen, Anzeigeordner, Formatstrings, Ausblenden, `summarizeBy`, Sortierspalten.
 7. **Umbenennen im Datenbereich, nicht im Skript.** Berichte binden Felder über Namen.
 8. **`lineageTag` nie erfinden lassen:** vorhandene unverändert übernehmen, bei neuen Objekten weglassen.
-9. **Einrückung mit Tabs prüfen.** Eine Leerzeile zwischen `///` und Objekt löscht die Beschreibung ohne Fehlermeldung.
+9. **Einrückung mit Tabs prüfen.** Zwischen `///` und Objekt darf keine Leerzeile stehen – sonst Parserfehler oder verlorene Beschreibung.
 10. **Keine Daten, keine Verbindungen in den Prompt:** `partition`- und `expression`-Blöcke weglassen.
 11. **PBIP in Git** macht jede Änderung als Diff sichtbar. Lesen Sie den Diff vor jedem Commit.
 
@@ -35,8 +35,8 @@ Glossar [K05](../prompts/kontext/K05_Kennzahlen-Glossar.md) oder Ihre Rückfrage
 
 1. **Öffnen:** linke Leiste › **TMDL-Ansicht** (in Desktop allgemein verfügbar, im Service Vorschau). Der Editor startet leer.
 2. **Skripten:** Objekte aus dem **Datenbereich** in den Editor ziehen – mit **Strg** mehrere, oder einen ganzen Abschnitt
-   (z. B. alle Measures einer Tabelle); alternativ Rechtsklick › **TMDL skripten**. Desktop erzeugt ein `createOrReplace`-Skript,
-   bei Measures und Spalten mit `ref table` für die Tabelle.
+   (z. B. alle Measures einer Tabelle); alternativ Rechtsklick › **Skript TMDL** (engl. *Script TMDL to*) › Registerkarte oder
+   Zwischenablage. Desktop erzeugt ein `createOrReplace`-Skript, bei Measures und Spalten mit `ref table` für die Tabelle.
 3. **Original sichern:** Registerkarte umbenennen (`ORIGINAL …`), nicht mehr anfassen; Änderungen in einer zweiten Registerkarte.
 4. **Bearbeiten:** selbst (Strg+F mit regulären Ausdrücken, Umschalt+Alt+F formatiert) oder das geprüfte Copilot-Ergebnis
    einfügen. Der Bereich **Probleme** zeigt Syntaxfehler mit Zeile.
@@ -61,8 +61,9 @@ sogar die Daten, weil sie in `expressions.tmdl` stecken.
 - **Ablage:** kurzer lokaler Pfad (Windows-Grenze 260 Zeichen), nicht direkt in OneDrive- oder SharePoint-Ordner speichern.
 - **Git:** Repository z. B. in Azure DevOps, Arbeit in VS Code (Quellcodeverwaltung). Ein Commit je abgeschlossener Änderung
   mit sprechender Nachricht („Beschreibungen Fakt_Leistung ergänzt“).
-- **Extern bearbeiten:** vorher in Desktop speichern. Desktop bietet dann **Externe Änderungen anwenden** an (Vorschaufeature
-  „Detect and reload external PBIP changes“, ab Desktop August 2026), sonst Projekt neu öffnen.
+- **Extern bearbeiten:** vorher in Desktop speichern, Dateien als UTF-8 ohne BOM sichern. Desktop bietet dann **Externe
+  Änderungen anwenden** (engl. *Apply external changes*) an – Vorschaufeature „Detect and reload external PBIP changes“, ab
+  Desktop August 2026; ungespeicherte Änderungen in Desktop gehen dabei verloren. Ohne das Feature: Projekt neu öffnen.
 
 **Diff lesen.** Die Korrektur einer ID-Spalte im Git-Diff (Ausschnitt, `lineageTag`-Zeilen weggelassen):
 
@@ -89,7 +90,7 @@ verschobene Eigenschaften. **Warnsignale:** Blöcke nur mit `-` (Objekt gelösch
 | Formatstrings | `formatString: #,0 €` | Punkt als Dezimaltrenner; Prozent-Measures `0.0 %` |
 | IDs ausblenden | `isHidden`, `summarizeBy: none` | z. B. `RegionID`, `LeistungsartID` in `Fakt_Leistung` und `Massnahmen` |
 | Sortierspalten | `sortByColumn: MonatNr` an `Kalender[Monatsname]` | Sortierspalte nie aus der sortierten Spalte berechnen |
-| Datumstabelle | `dataCategory: Time` an der Tabelle | sicherer in Desktop: **Tabellentools › Als Datumstabelle markieren** – per TMDL müsste die ganze Tabelle samt Partition ins Skript |
+| Datumstabelle | `dataCategory: Time` an der Tabelle | sicherer in Desktop: **Tabellentools › Als Datumstabelle markieren** (mit aktivierter Vorschau der kalenderbasierten Zeitintelligenz unter **Kalenderoptionen**) – per TMDL müsste die ganze Tabelle samt Partition ins Skript |
 
 So soll Copilots Rückgabe aussehen: neu sind nur Beschreibung, Ordner und Format, alles andere stammt Zeichen für Zeichen aus
 dem skriptierten Original (dessen `lineageTag`-Zeilen fehlen hier zur Übersicht – bei Ihnen bleiben sie stehen). Die Division
@@ -123,8 +124,9 @@ ganze Tabelle geskriptet, verschwindet das alte, und Visuals zeigen Fehler – d
 
 ### Große Modelle in Teilen an Copilot geben
 
-- **Copilot merkt nicht, wenn eine Eingabe abgeschnitten wurde,** und „ergänzt“ fehlende Teile. **Inventar zuerst:** Abfragen 1–4 aus `INFO_Abfragen.dax` – kompakt und vollständig. Dann je Tabelle oder Anzeigeordner das
-  TMDL, als `.txt` angehängt oder als Referenz im Copilot Notebook.
+- **Copilot merkt nicht, wenn eine Eingabe abgeschnitten wurde,** und „ergänzt“ fehlende Teile. **Inventar zuerst:**
+  Abfragen 1–4 aus `INFO_Abfragen.dax` – kompakt und vollständig. Dann je Tabelle oder Anzeigeordner das TMDL, als `.txt`
+  angehängt oder als Referenz im Copilot Notebook.
 - **Weglassen:** `partition`-Blöcke (Server, SQL, SAP-Abfragen, Dataflow-IDs) und `expression`-Blöcke – im Übungsmodell **nie**
   `Daten_Fakt_Leistung` und `Daten_Massnahmen`; für reine Leseaufgaben auch `annotation`-Zeilen.
 - **Zum Zurückschreiben** nur skriptierte Measures und Spalten geben (mit `lineageTag`); eine Tabelle nie ohne ihre Partition anwenden.
@@ -140,7 +142,8 @@ ganze Tabelle geskriptet, verschwindet das alte, und Visuals zeigen Fehler – d
 ## Mit Copilot arbeiten
 
 Copilot Notebook „Modellpflege“ mit [K01](../prompts/kontext/K01_Arbeitsregeln-BI-Copilot.md), K03, K05 als Referenzen. **Mit Kapazität**
-(F2+/P1+, Admin-Freigabe, keine Testkapazität) erzeugt Copilot in Power BI einzelne Beschreibungen (**Mit Copilot erstellen**).
+(bezahlte Fabric-Kapazität F2+ oder Premium P1+ bzw. Fabric Copilot capacity; keine Testkapazität, kein PPU) erzeugt Copilot in
+Power BI einzelne Measure-Beschreibungen: Modellansicht › Eigenschaften › **Erstellen mit Copilot** (engl. *Create with Copilot*).
 
 ### Aufgabe 1 · Beschreibungen, Anzeigeordner und Formatstrings für viele Measures
 
@@ -185,7 +188,7 @@ Ausgabe: Skript in einem ```tmdl-Block, danach Tabelle Objekt | Eigenschaft | al
 **Ergebnis prüfen**
 - [ ] Keine Spalte, die in einer Beziehung steht, wurde umbenannt oder entfernt.
 - [ ] Im Bericht sortieren Monatsnamen Januar bis Dezember.
-- [ ] Abfrage 6 aus `INFO_Abfragen.dax` meldet bei F6 nur noch die Dimensionsschlüssel, bei F7 nichts mehr.
+- [ ] Abfrage 6 aus `INFO_Abfragen.dax` meldet bei F6 höchstens noch die Dimensionsschlüssel (falls nicht mitgeskriptet), bei F7 nichts mehr.
 
 ### Aufgabe 3 · Diff erklären lassen – vor dem Anwenden oder vor dem Commit
 
@@ -210,7 +213,7 @@ Ausgabe: Tabelle Objekt | Änderung | Kategorie | Beleg-Zeile; darunter "Empfehl
 
 ```text
 Du bist Power-BI-Architekt und planst eine Umbenennung in einem produktiven Modell.
-Kontext: Umbenennung [EINFÜGEN: z. B. Measure m_QQ → Qualitätsquote]; Measures als TMDL ohne Partitionen [EINFÜGEN];
+Kontext: Umbenennung [EINFÜGEN: z. B. Measure m_QQ → Qualitätsquote]; Measures als TMDL ohne Partitionen [EINFÜGEN: TMDL];
 Nutzung des Modells [EINFÜGEN: Berichte, Excel-Dateien, gespeicherte DAX-Abfragen, AI-Instructions, Doku].
 Aufgabe: Liste alle Stellen, die den alten Namen enthalten oder enthalten könnten: DAX-Verweise im Modell (mit Measure-Name),
 abhängige Artefakte außerhalb des Modells, Texte. Schreibe danach einen Ablaufplan: sichern, im Datenbereich umbenennen,
@@ -228,13 +231,13 @@ Ausgabe: Tabelle Fundstelle | Typ | belegt/zu prüfen | Aktion; danach Ablaufpla
 | Symptom | Ursache | Lösung |
 |---|---|---|
 | **Anwenden** meldet Einrückungs- oder Parserfehler | Leerzeichen statt Tabs nach dem Kopieren aus dem Chat | Führende Leerzeichen per Suchen/Ersetzen durch Tabs ersetzen; „Einrückung mit Tabs“ im Prompt |
-| Beschreibung fehlt nach dem Anwenden, ohne Fehler | Leerzeile zwischen `///` und Objekt | Leerzeile löschen, erneut anwenden |
+| Beschreibung fehlt nach dem Anwenden – oder Parserfehler in der Zeile nach `///` | Leerzeile zwischen `///` und Objekt (laut Microsoft nicht erlaubt; je nach Version Fehler oder stiller Verlust) | Leerzeile löschen, erneut anwenden |
 | `formatString` oder `displayFolder` plötzlich weg | Copilot hat Eigenschaften weggelassen; `createOrReplace` ersetzt das ganze Objekt | Original-Registerkarte anwenden, Skript vergleichen, neu beginnen |
 | Visuals: „Feld kann nicht gefunden werden“ | Umbenennung im Skript | Original-Registerkarte anwenden, im Datenbereich umbenennen |
 | Tabelle nach dem Anwenden leer, Aktualisierung scheitert | Tabelle ohne `partition`-Block angewendet | Partition aus dem Original ergänzen bzw. Original anwenden |
 | Copilot verwendet Namen, die es nicht gibt | Nur Teil des Modells oder Beschreibung statt TMDL im Prompt | Relevantes TMDL mitgeben; „Verwende nur Namen aus dem Kontext“ |
 | Neue `lineageTag`-GUIDs im Skript | Copilot hat sie erfunden | Bei neuen Objekten löschen, bei bestehenden das Original übernehmen |
-| Änderungen aus VS Code erscheinen nicht in Desktop | Desktop hält das Modell im Speicher | **Externe Änderungen anwenden** bzw. Projekt neu öffnen; vorher in Desktop speichern |
+| Änderungen aus VS Code erscheinen nicht in Desktop | Desktop hält das Modell im Speicher | **Externe Änderungen anwenden** (Vorschaufeature aktivieren) bzw. Projekt neu öffnen; vorher in Desktop speichern |
 | Git-Diff zeigt Hunderte geänderte Zeilen | Zeilenenden (CRLF) oder Daten in `expressions.tmdl` | `core.autocrlf` setzen; Ausdrücke mit Daten getrennt betrachten |
 
 ## Checkliste
@@ -250,7 +253,7 @@ Ausgabe: Tabelle Fundstelle | Typ | belegt/zu prüfen | Aktion; danach Ablaufpla
 
 ## Weiterführend
 
-Microsoft Learn, geprüft am 18.11.2026:
+Microsoft Learn, geprüft am 22.11.2026:
 
 - TMDL-Ansicht: https://learn.microsoft.com/power-bi/transform-model/desktop-tmdl-view
 - TMDL-Sprache (Einrückung, Beschreibungen, Namen): https://learn.microsoft.com/analysis-services/tmdl/tmdl-overview

@@ -15,7 +15,8 @@ Datumsspalte, und vorhandene Measures werden wiederverwendet. Ergebnis: Measure 
 - Optional: **K02** (DAX-Styleguide), **K03** (TMDL-Kurzreferenz), **K05** (Kennzahlen-Glossar).
 - **Variante Copilot in Power BI:** In der DAX-Abfrageansicht liest Copilot die Modellmetadaten selbst (Namen,
   Ausdrücke, Beschreibungen bis 200 Zeichen). Bitten Sie dort um eine **Abfrage** mit `DEFINE MEASURE`, nicht um ein
-  Measure. Voraussetzung: Arbeitsbereich auf Fabric-/Premium-Kapazität, Copilot vom Admin freigegeben.
+  Measure. Voraussetzung: Arbeitsbereich auf bezahlter Fabric-Kapazität (F2+) oder Premium-Kapazität (P1+) bzw. Fabric
+  Copilot capacity; keine Testkapazität (Details in M1-03).
 - Datenschutz: nur Metadaten und Definitionen; unternehmensfreigegebenen Copilot nutzen.
 
 ## Prompt

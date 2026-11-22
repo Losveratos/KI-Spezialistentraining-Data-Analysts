@@ -2,7 +2,7 @@
 
 | Modul | Werkzeug | Übung | Dauer |
 |---|---|---|---|
-| 1 | M365 Copilot Chat oder Notebook (alternativ: „Diese Abfrage erklären“ in der DAX-Abfrageansicht, sofern Kapazität vorhanden) | Ü1.6 | 8 min |
+| 1 | M365 Copilot Chat oder Notebook (alternativ Copilot in der DAX-Abfrageansicht, Strg+I: „Erkläre diese Abfrage“ – sofern Kapazität vorhanden) | Ü1.6 | 8 min |
 
 ## Wofür
 Bevor Sie ein langes, gewachsenes Measure ändern, müssen Sie es verstehen: Welche Regeln stecken drin, in welcher

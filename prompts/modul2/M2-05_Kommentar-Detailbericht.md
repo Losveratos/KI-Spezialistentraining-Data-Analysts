@@ -13,8 +13,9 @@ weicht etwas ab, wie stark, wo genau (Region, Leistungsart) – und was hängt z
 Detailkommentare zeigen eine **Wirkungskette mit Zeitbezug**, schlechte zählen Monatswerte auf.
 
 ## Vorbereitung
-- `KPI_Monat_Region_Leistungsart.csv` anhängen (für den Drilldown) oder Export der Matrix Region × Monat
-  aus dem Detailbericht.
+- `KPI_Monat_Region_Leistungsart.csv` anhängen (für den Drilldown) und `KPI_Monat_Region.csv` (für die Zeitreihe
+  der Region – Quoten lassen sich aus den Leistungsart-Zeilen nicht korrekt mitteln), oder Export der Matrix
+  Region × Monat aus dem Detailbericht.
 - Bekannte Datenfehler aus M2-03 bereithalten.
 - Region festlegen, die Sie im Drilldown kommentieren (Übung: **Ost**; zum Vergleich **Mitte** und **Süd**).
 - Optional **K04**, **K05**.
@@ -27,7 +28,8 @@ Detailkommentare zeigen eine **Wirkungskette mit Zeitbezug**, schlechte zählen 
 Du bist Controller*in im Produktionscontrolling und kommentierst den Detailbericht.
 
 Kontext:
-- Daten: angehängte Datei [EINFÜGEN: Dateiname], Monatswerte je Region und Leistungsart, Jan 2025 – Okt 2026.
+- Daten: angehängte Datei(en) [EINFÜGEN: Dateinamen], Monatswerte je Region bzw. je Region und Leistungsart,
+  Jan 2025 – Okt 2026. Quoten der Region nimmst du aus der Regionsdatei; mittle sie nicht über Leistungsarten.
   Einheit der Prozentspalten: [EINFÜGEN: „Prozentwert, 7,12 = 7,12 %“ (Übungsexporte) oder „Anteil, 0,0712 = 7,12 %“ (eigene DAX-Abfrage)]. Qualitaetsquote = Measure m_QQ (bestandene / durchgeführte Prüfungen).
 - Fokusregion: [EINFÜGEN: z. B. Ost]. Vergleichsregion ohne Auffälligkeit: [EINFÜGEN: z. B. Mitte].
 - Bekannte Datenfehler, die du ausklammerst: [EINFÜGEN: Funde aus M2-03]

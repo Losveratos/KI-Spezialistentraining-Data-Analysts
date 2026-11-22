@@ -13,7 +13,7 @@ Kontextdateien: **K04** (Kommentar-Leitfaden), **K05** (Kennzahlen-Glossar), Gru
 > **Werkzeug-Hinweis:** Analyst (Agent in Copilot Chat) und Copilot in Excel mit Python rechnen tatsächlich
 > und zeigen Code – erste Wahl für Profile und Korrelationen. Beide setzen eine Microsoft-365-Copilot-Lizenz
 > bzw. Freigaben voraus. Copilot im Power-BI-Bericht und in der DAX-Abfrageansicht braucht zusätzlich einen
-> Workspace auf bezahlter Fabric-/Premium-Kapazität. **Jede Übung geht auch mit dem normalen
+> Arbeitsbereich auf bezahlter Fabric-/Premium-Kapazität. **Jede Übung geht auch mit dem normalen
 > M365 Copilot Chat und angehängter Datei** – dann alle Zahlen in Excel nachrechnen.
 
 **Einheiten in den Exporten:** Prozentspalten sind Prozentwerte (`6,87` = 6,87 %). Eine eigene DAX-Abfrage
@@ -160,7 +160,7 @@ Verstoßliste mit Rückfragen, Status- und Wirkungstabelle, Statuskommentar ≤ 
 > Zielwert von 90 %. Die Tourenoptimierung Süd hat ihre geplante Einsparung um 50 % übertroffen.
 
 **Erwartetes Ergebnis**
-Prüftabelle mit sieben Behauptungen und Bewertung, drei wichtigste Korrekturen, korrigierte Fassung.
+Prüftabelle mit acht Behauptungen und Bewertung, drei wichtigste Korrekturen, korrigierte Fassung.
 
 ## Ü2.9 · Optional: Kommentar-Baustein als DAX-Measure (15 min)
 

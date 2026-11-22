@@ -11,6 +11,7 @@ auf Ihre eigenen Modelle und Berichte übertragen können.
 
 | Ordner / Datei | Was steckt drin |
 |---|---|
+| [Spickzettel.md](Spickzettel.md) | Alles Wichtige auf zwei Seiten: Ablauf, Prompt-Bausteine, Regeln für TMDL, DAX, Power Query, Kommentare – mit Prompt-Finder |
 | [prompts/00_Prompting-Grundregeln.md](prompts/00_Prompting-Grundregeln.md) | Die Grundregeln für Analyse-Prompts – zuerst lesen |
 | [prompts/kontext/](prompts/kontext/README.md) | Kontextdateien (Arbeitsregeln, DAX-Styleguide, TMDL-Kurzreferenz, Kommentar-Leitfaden, Glossar) zum Hinterlegen in Copilot |
 | [prompts/modul1/](prompts/modul1/) | Prompts für TMDL, DAX, M, SQL, Dokumentation, KI-Fähigkeit |
@@ -43,8 +44,8 @@ Kontext hinterlegen (Notebook / Anhang)  →  Prompt kopieren + Platzhalter fül
 - Power BI Desktop (aktuelle Version) mit TMDL-Ansicht und DAX-Abfrageansicht
 - Microsoft 365 Copilot (Chat, Notebooks) mit Unternehmenskonto
 - Copilot in Excel für Modul 2
-- Optional, sofern freigeschaltet: Copilot in Power BI (setzt einen Workspace auf Fabric-Kapazität voraus),
-  Analyst- und Researcher-Agent
+- Optional, sofern freigeschaltet: Copilot in Power BI (setzt einen Arbeitsbereich auf bezahlter Fabric-Kapazität ab F2
+  oder Premium ab P1 voraus, Testkapazitäten reichen nicht), Analyst- und Researcher-Agent
 
 ## Wichtig
 

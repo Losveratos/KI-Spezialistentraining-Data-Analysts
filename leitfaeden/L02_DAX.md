@@ -4,8 +4,7 @@
 > Korrigieren und Testen hilft. **Für wen:** Data Analysts, die Measures in Power BI Desktop pflegen (Import und DirectQuery).
 > **Bezug:** Modul 1, Übungen Ü1.2–Ü1.8 und Ü1.11 ([Übungen](../uebungen/Modul1_Uebungen.md), [Übungsmodell](../uebungsdaten/modell/README.md)).
 > Formatierung und Benennung regelt der [DAX-Styleguide K02](../prompts/kontext/K02_DAX-Styleguide.md) – hier nicht wiederholt.
-> Ausführliche Einzelprompts: [M1-03](../prompts/modul1/M1-03_DAX-formatieren-kommentieren.md) bis
-> [M1-09](../prompts/modul1/M1-09_Measure-aus-TMDL-Kontext.md).
+> Ausführliche Einzelprompts: [M1-03](../prompts/modul1/M1-03_DAX-formatieren-kommentieren.md) bis [M1-09](../prompts/modul1/M1-09_Measure-aus-TMDL-Kontext.md).
 
 ## Auf einen Blick
 
@@ -121,8 +120,8 @@ RETURN
     IF ( NOT ISBLANK ( _Ist ), DIVIDE ( _Ist - _VJ, _VJ ) )
 ```
 
-Die neuere kalenderbasierte Zeitintelligenz (eigene Kalenderdefinition, laut Microsoft Learn Vorschau) behandelt dieser
-Leitfaden nicht.
+Die neuere kalenderbasierte Zeitintelligenz (eigene Kalenderdefinition, laut Microsoft Learn weiterhin Vorschau) behandelt
+dieser Leitfaden nicht; für die klassischen Zeitfunktionen oben bleibt die markierte Datumstabelle Voraussetzung.
 
 ### SWITCH ( TRUE () ) und BLANK-Verhalten
 
@@ -154,7 +153,7 @@ RETURN
 - **Implizite Measures** entstehen, wenn eine Spalte mit Σ ins Visual gezogen wird: keine zentrale Logik, kein Formatstring,
   keine Beschreibung. Berechnungsgruppen und „In Excel analysieren“ (MDX) brauchen explizite Measures.
 - Umsetzen: numerische Faktspalten ausblenden, Measures mit Beschreibung anlegen, im Modell-Explorer die Modelleigenschaft
-  „Implizite Measures vermeiden“ (engl. *Discourage implicit measures*) setzen. Bestehende Visuals funktionieren weiter.
+  „Implizite Measures verhindern“ (engl. *Discourage implicit measures*) setzen. Bestehende Visuals funktionieren weiter.
 
 ### DirectQuery-Besonderheiten
 
@@ -170,59 +169,22 @@ RETURN
 
 **Zwei Wege.** (1) **M365 Copilot Chat oder Notebook** – immer verfügbar, kennt nur, was Sie einfügen. K02 und
 [K03](../prompts/kontext/K03_TMDL-Kurzreferenz.md) im Notebook hinterlegen, TMDL aus der TMDL-Ansicht einfügen.
-(2) **Copilot in der DAX-Abfrageansicht** – nur mit Arbeitsbereich auf bezahlter Fabric- oder Premium-Kapazität (F2+/P1+),
-vom Admin freigegeben, nicht mit Testkapazität. Er liest Modellmetadaten (Beschreibungen nur die ersten 200 Zeichen) und
-einzelne Min/Max-Werte, aber keine fachlichen Definitionen; neue DAX-Funktionen kennt er evtl. nicht.
+(2) **Copilot in der DAX-Abfrageansicht** (Strg+I, Vorschau) – nur mit Arbeitsbereich auf bezahlter Fabric-Kapazität (F2+)
+oder Premium-Kapazität (P1+) bzw. einer Fabric Copilot capacity; Testkapazität (Trial) und PPU reichen nicht, der Admin kann
+Copilot abschalten. Er liest Modellmetadaten (Beschreibungen nur die ersten 200 Zeichen) und einzelne Min/Max-Werte, aber
+keine fachlichen Definitionen; neue DAX-Funktionen kennt er evtl. nicht. Bitten Sie dort um eine **Abfrage**, nicht um ein Measure.
 
-### 1 · Measure erklären
+**Vier Aufgaben haben einen ausführlichen Einzelprompt** – hier steht nur, was Sie für DAX ergänzen und zusätzlich prüfen.
+Für drei weitere Aufgaben folgen die Prompts darunter.
 
-**Wann:** vor jeder Änderung an einem gewachsenen Measure. Ausführlich: [M1-06](../prompts/modul1/M1-06_Grosses-Measure-analysieren.md).
+| Aufgabe | Einzelprompt | DAX-Zusatz im Prompt | Zusätzlich prüfen |
+|---|---|---|---|
+| Measure erklären (vor jeder Änderung) | [M1-06](../prompts/modul1/M1-06_Grosses-Measure-analysieren.md) | „Zeig, welcher Filterkontext gilt, wo CALCULATE Filter ändert, wo Kontextübergang entsteht und was in der Summenzeile passiert.“ | Aussagen zur Summenzeile per Testabfrage nachrechnen. Mit Kapazität: Measure › Schnellabfragen › „Definieren und auswerten“, dann Copilot (Strg+I): „Erkläre diese Abfrage“ |
+| Measure aus TMDL-Kontext schreiben | [M1-09](../prompts/modul1/M1-09_Measure-aus-TMDL-Kontext.md) | „Zeitintelligenz nur über Kalender[Datum]; Monate ohne Ist bleiben leer.“ | Objektliste gegen das TMDL abhaken · Wert für einen bekannten Monat stimmt · keine kopierte Logik vorhandener Measures |
+| Fehler aus der Meldung beheben | [M1-08](../prompts/modul1/M1-08_Fehler-beheben.md), Fälle: [Fehlerfaelle.md](../uebungsdaten/modul1/Fehlerfaelle.md) | „Unterdrücke Fehler nicht mit IFERROR oder ISERROR.“ | Ursache erklärt den Wortlaut der Meldung · der Fix ändert die fachliche Bedeutung nicht (Jahr bleibt Zahl, statt per `FORMAT` Text zu werden) |
+| Beschreibungen erzeugen | [M1-12](../prompts/modul1/M1-12_Beschreibungen-als-TMDL.md) | „Höchstens 200 Zeichen, Wichtigstes zuerst. Leite die Definition aus dem DAX-Code ab, nicht aus dem Namen.“ | Beschreibung passt zum Code (`m_QQ` = bestandene durch durchgeführte Prüfungen). Ohne TMDL-Ansicht: `///` über `MEASURE` im `DEFINE`-Block schreiben, dann **Modell mit Änderungen aktualisieren** |
 
-```text
-Du bist DAX-Expert*in im Produktionscontrolling. Erkläre das Measure für Kolleg*innen aus dem Controlling.
-Measure: [EINFÜGEN: DAX-Code]
-Modellkontext (TMDL der beteiligten Tabellen und Beziehungen): [EINFÜGEN: TMDL-Ausschnitt]
-Ausgabe: 1. Zweck in einem Satz. 2. Schritte: welcher Filterkontext gilt, wo CALCULATE Filter ändert, wo
-Kontextübergang entsteht. 3. Verhalten bei leeren Werten, Nenner 0 und in der Summenzeile. 4. Risiken als Liste.
-Ändere den Code nicht. Wenn eine Definition fehlt, frag nach, statt zu raten.
-```
-
-**Ergebnis prüfen:** Aussagen zur Summenzeile per Testabfrage nachrechnen · jede genannte Funktion auf dax.guide
-nachschlagen · nur Objekte aus dem TMDL. Variante Copilot in Power BI: Measure › Schnellabfrage „Definieren und
-auswerten“, dann **Diese Abfrage erklären**.
-
-### 2 · Measure aus TMDL-Kontext schreiben
-
-**Wann:** neue Kennzahl. Vollständig mit TMDL-Ausgabe: [M1-09](../prompts/modul1/M1-09_Measure-aus-TMDL-Kontext.md).
-
-```text
-Erstelle das Measure „[EINFÜGEN: Name]“ nach DAX-Styleguide K02.
-Fachliche Definition mit Einheit: [EINFÜGEN: Definition]. Bei leerem Nenner/fehlendem Vorjahr: [EINFÜGEN: Verhalten].
-Modell als TMDL (maßgeblich, andere Objekte gibt es nicht): [EINFÜGEN: TMDL]
-Regeln: nur Objekte aus dem TMDL, vorhandene Measures wiederverwenden, Zeitintelligenz nur über Kalender[Datum], DIVIDE.
-Ausgabe: Measure mit Kopfkommentar, Liste der verwendeten Objekte, Testabfrage, Annahmen.
-```
-
-**Ergebnis prüfen:** Objektliste gegen das TMDL abhaken · Testabfrage läuft, Wert für einen bekannten Monat stimmt ·
-keine kopierte Logik vorhandener Measures.
-
-### 3 · Fehler aus der Meldung beheben
-
-**Wann:** rote Meldung in der Bearbeitungsleiste oder „Fehler beim Abrufen der Daten“. Ausführlich:
-[M1-08](../prompts/modul1/M1-08_Fehler-beheben.md), Übungsfälle: [Fehlerfaelle.md](../uebungsdaten/modul1/Fehlerfaelle.md).
-
-```text
-Diese DAX-Formel erzeugt einen Fehler.
-Code: [EINFÜGEN: DAX]   Meldung im Wortlaut: [EINFÜGEN: Fehlermeldung]
-Datentypen der beteiligten Spalten (TMDL): [EINFÜGEN: TMDL-Ausschnitt]
-Erst Diagnose (Ursache in 2 Sätzen, betroffene Stelle), dann korrigierter Code, dann eine Testabfrage, die den Fix belegt.
-Unterdrücke Fehler nicht mit IFERROR oder ISERROR.
-```
-
-**Ergebnis prüfen:** Ursache erklärt den Wortlaut der Meldung · der Fix ändert die fachliche Bedeutung nicht (Jahr bleibt
-Zahl, statt per `FORMAT` Text zu werden) · Testabfrage ausgeführt.
-
-### 4 · Performance verbessern – mit Begründung
+### 1 · Performance verbessern – mit Begründung
 
 **Wann:** Visual lädt langsam, die Leistungsanalyse zeigt hohe DAX-Zeit. Vergleichstest: [M1-07](../prompts/modul1/M1-07_Measure-refaktorisieren-und-testen.md).
 
@@ -237,7 +199,7 @@ Das Ergebnis muss in jedem Filterkontext gleich bleiben. Schreib eine Vergleichs
 **Ergebnis prüfen:** Vergleichsabfrage ohne unerklärte Abweichungen · Laufzeit vorher/nachher selbst messen
 (Leistungsanalyse, Abfragezeit in der DAX-Abfrageansicht) – „schneller“ ohne Messung ist nur eine Behauptung.
 
-### 5 · Testabfrage erzeugen
+### 2 · Testabfrage erzeugen
 
 **Wann:** bei jedem neuen oder geänderten Measure und zum Abgleich mit einem Berichtswert.
 
@@ -250,9 +212,9 @@ Filter, die Basis-Measures als Kontrollspalten, ORDER BY. Nur Objekte aus dem TM
 ```
 
 **Ergebnis prüfen:** läuft fehlerfrei · Filterwerte passen zum Datentyp (`{ 2026 }` Zahl, `{ "2026-10" }` Text) · eine
-Zeile gegen den Bericht abgeglichen. Variante Copilot in Power BI: die Abfrage in Worten in der DAX-Abfrageansicht anfordern.
+Zeile gegen den Bericht abgeglichen. Mit Kapazität: die Abfrage in der DAX-Abfrageansicht in Worten anfordern (Strg+I).
 
-### 6 · Anteils- und Zeitvergleichsmuster
+### 3 · Anteils- und Zeitvergleichsmuster
 
 **Wann:** Anteil am Gesamt oder an der Auswahl, Vorjahr, YTD, rollierende 12 Monate.
 
@@ -267,27 +229,12 @@ TMDL: [EINFÜGEN: TMDL mit Kalender und Beziehungen]
 **Ergebnis prüfen:** Anteile summieren sich im Visual dort zu 100 %, wo Sie es erwarten · VJ-Wert für 2026-10 gleich
 Ist für 2025-10 · Monate ohne Ist bleiben leer · Sortierspalten im Nenner berücksichtigt.
 
-### 7 · Beschreibungen erzeugen
-
-**Wann:** vor der Veröffentlichung, auch als Grundlage für Copilot in Power BI. Ausführlich: [M1-12](../prompts/modul1/M1-12_Beschreibungen-als-TMDL.md).
-
-```text
-Schreib für jedes Measure im TMDL-Skript eine Beschreibung: fachliche Definition, Einheit, Verhalten bei leeren Werten.
-Höchstens 200 Zeichen, Wichtigstes zuerst. Leite die Definition aus dem DAX-Code ab, nicht aus dem Namen.
-Fachliche Definitionen: [EINFÜGEN: Glossar K05 oder eigene]   TMDL-Skript: [EINFÜGEN: createOrReplace-Skript]
-Gib das Skript zurück, ergänzt nur um /// Beschreibung direkt über jeder measure-Zeile. Unklares als Frage auflisten.
-```
-
-**Ergebnis prüfen:** Beschreibung passt zum Code (`m_QQ` = bestandene durch durchgeführte Prüfungen) · keine erfundenen
-Geschäftsregeln · ≤ 200 Zeichen. Ohne TMDL-Ansicht: `///` über `MEASURE` im `DEFINE`-Block der DAX-Abfrageansicht
-schreiben und das Modell aktualisieren – die Beschreibung wird mitgespeichert.
-
 ## Testen in der DAX-Abfrageansicht
 
 Eine Abfrage besteht aus optionalem `DEFINE` (Measures und Variablen nur für diese Abfrage) und mindestens einem
 `EVALUATE`. Ein per `DEFINE MEASURE` definiertes Measure ersetzt in der Abfrage das gleichnamige Modell-Measure – so testen
-Sie Änderungen, ohne das Modell anzufassen. Übernommen wird erst per CodeLens **Modell aktualisieren** bzw. Schaltfläche
-**Modell mit Änderungen aktualisieren**. Pro Ausführung nur ein `DEFINE`-Block.
+Sie Änderungen, ohne das Modell anzufassen. Übernommen wird erst per CodeLens **Modell aktualisieren: …** bzw. Schaltfläche
+**Modell mit Änderungen aktualisieren**. Pro Ausführung nur ein `DEFINE`-Block – Abfragen einzeln markieren oder je Registerkarte.
 
 Vergleich alt gegen neu – `Abw Kosten %` rechnet im Übungsmodell mit `/`, die neue Fassung mit `DIVIDE`:
 
@@ -314,12 +261,13 @@ FILTER (
 ORDER BY Region[Region], Kalender[Monat]
 ```
 
-- Leeres Ergebnis = keine Abweichung. Erwartet sind hier nur Zeilen mit Plan 0 oder leer (alt „Unendlich“, neu leer).
-  **Abweichungen erklären, nicht nur zählen.**
+- Leeres Ergebnis = keine Abweichung – so im Übungsmodell, weil dort kein Plan 0 ist. In echten Modellen sind Zeilen mit
+  Plan 0 zu erwarten (alt „Unendlich“, neu leer). **Abweichungen erklären, nicht nur zählen.**
 - `SUMMARIZECOLUMNS` gruppiert wie ein Visual und lässt Zeilen weg, in denen alle Measures leer sind. `TREATAS` setzt
   einen Filter wie ein Slicer – Datentyp beachten (`Kalender[Jahr]` Zahl, `Kalender[Monat]` Text).
-- Gerüst per Rechtsklick auf ein Measure › Schnellabfragen › „Definieren mit Verweisen und auswerten“; die Abfrage eines
-  Visuals über die Leistungsanalyse. Fertige Vergleiche: [INFO_Abfragen.dax](../uebungsdaten/modul1/INFO_Abfragen.dax), 7–9.
+- Gerüst per Rechtsklick auf ein Measure › Schnellabfragen › „Mit Verweisen definieren und auswerten“ (engl. *Define with
+  references and evaluate*); die Abfrage eines Visuals über Optimieren › Leistungsanalyse. Fertige Vergleiche:
+  [INFO_Abfragen.dax](../uebungsdaten/modul1/INFO_Abfragen.dax), Abfragen 7–9.
 
 ## Häufige Fehler und erfundene Funktionen
 
@@ -335,7 +283,6 @@ ORDER BY Region[Region], Kalender[Monat]
 | Measure sehr langsam | `FILTER ( Fakt_Leistung, … )` oder Measure-Aufruf je Faktzeile | Spaltenprädikat, Iteration über Dimension |
 | DirectQuery-Visual läuft in Zeitüberschreitung | komplexes Measure wird zu teurem SQL | vereinfachen, Logik in die View |
 | „Es wurde eine zirkuläre Abhängigkeit erkannt“ | Sortierspalte aus der sortierten Spalte berechnet | Sortierspalte aus der Quelle (`Kalender[MonatNr]`) |
-| Mehrere Abfragen auf einmal scheitern | mehr als ein `DEFINE`-Block | Abfragen einzeln markieren oder je Registerkarte |
 
 **Typische KI-Halluzinationen** – diese Funktionen gibt es in DAX nicht:
 
@@ -345,11 +292,11 @@ ORDER BY Region[Region], Kalender[Monat]
   `LOOKUPVALUE` · `TEXTJOIN` → `CONCATENATEX`
 - aus SQL: `ISNULL`, `NVL`, `NULLIF` → `ISBLANK`, `COALESCE` · `CASE WHEN` → `SWITCH` · `GETDATE` → `TODAY`, `NOW` ·
   `DATEPART` → `YEAR`, `MONTH`, `QUARTER` · `SUBSTRING` → `MID` · `STRING_AGG` → `CONCATENATEX` · `LAG`, `LEAD` → `OFFSET`
-  oder Zeitintelligenz · `GROUP BY` → `SUMMARIZECOLUMNS` · `NULL` → `BLANK ()`
-- SQL-Syntax: `!=` → `<>`, `IN ('a', 'b')` → `IN { "a", "b" }`; Text immer in doppelten Anführungszeichen
-- aus Power Query: `Text.Combine`, `Date.Year` usw. sind M, nicht DAX
+  oder Zeitintelligenz · `GROUP BY` → `SUMMARIZECOLUMNS` (die Funktion `GROUPBY` gibt es, sie passt selten) · `NULL` → `BLANK ()`
+- SQL-Syntax: `!=` → `<>`, `IN ('a', 'b')` → `IN { "a", "b" }`; Text immer in doppelten Anführungszeichen · aus Power Query:
+  `Text.Combine`, `Date.Year` usw. sind M, nicht DAX
 - `RUNNINGSUM`, `MOVINGAVERAGE`, `PREVIOUS`, `NEXT` gibt es – aber **nur in Visualberechnungen**, nicht in Measures
-- echt, obwohl sie erfunden wirken: `COALESCE`, `NETWORKDAYS`, `OFFSET`, `WINDOW`, `RANK`
+- echt, obwohl sie erfunden wirken: `COALESCE`, `NETWORKDAYS`, `OFFSET`, `WINDOW`, `RANK` – und eigene Funktionen (DAX-UDFs, `DEFINE FUNCTION`; seit Juni 2026 allgemein verfügbar)
 
 Gegenmittel: Funktion auf dax.guide oder Microsoft Learn nachschlagen, in einem neuen Chat gegenprüfen lassen
 ([M1-02](../prompts/modul1/M1-02_Halluzinationen-gegenpruefen.md)), Code immer ausführen.
@@ -357,34 +304,17 @@ Gegenmittel: Funktion auf dax.guide oder Microsoft Learn nachschlagen, in einem 
 ## Checkliste vor dem Veröffentlichen
 
 - [ ] Alle Kennzahlen sind explizite Measures; numerische Faktspalten ausgeblendet, implizite Measures unterbunden
-- [ ] Jedes Measure nach [K02](../prompts/kontext/K02_DAX-Styleguide.md): Kopfkommentar, Formatstring, Anzeigeordner
-- [ ] Jedes Measure hat eine Beschreibung, das Wichtigste in den ersten 200 Zeichen
+- [ ] Jedes Measure nach [K02](../prompts/kontext/K02_DAX-Styleguide.md) (Kopfkommentar, Formatstring, Anzeigeordner) und mit Beschreibung – das Wichtigste in den ersten 200 Zeichen
 - [ ] Kein `/` außer bei konstantem Nenner; keine BLANK-zu-0-Umwandlung ohne fachlichen Grund
 - [ ] Zeitintelligenz nur über `Kalender[Datum]`; Kalender markiert und lückenlos; Monate ohne Ist bleiben leer
 - [ ] Anteile: Nenner geprüft (Gesamt oder Auswahl), Sortierspalten berücksichtigt
-- [ ] Kein `FILTER ( Faktentabelle, … )` in `CALCULATE`, keine Measure-Aufrufe je Faktzeile
-- [ ] Geänderte Measures per Vergleichsabfrage alt gegen neu geprüft, Abweichungen erklärt
-- [ ] Mindestens eine Zahl je Seite gegen Quelle oder Vorbericht abgeglichen
-- [ ] DirectQuery: Laufzeit der wichtigsten Visuals in der Leistungsanalyse gemessen
+- [ ] Kein `FILTER ( Faktentabelle, … )` in `CALCULATE`, keine Measure-Aufrufe je Faktzeile; DirectQuery: Laufzeit der wichtigsten Visuals in der Leistungsanalyse gemessen
+- [ ] Geänderte Measures per Vergleichsabfrage alt gegen neu geprüft, Abweichungen erklärt; je Seite mindestens eine Zahl gegen Quelle oder Vorbericht abgeglichen
 - [ ] Keine von Copilot vorgeschlagene Funktion ungeprüft übernommen, Annahmen geklärt
 
 ## Weiterführend
 
-- **Microsoft Learn:** [DAX-Funktionsreferenz](https://learn.microsoft.com/dax/dax-function-reference) ·
-  [DAX-Abfragen](https://learn.microsoft.com/dax/dax-queries) ·
-  [DAX-Abfrageansicht](https://learn.microsoft.com/power-bi/transform-model/dax-query-view) ·
-  [DAX-Abfragen mit Copilot schreiben](https://learn.microsoft.com/dax/dax-copilot) ·
-  [Copilot mit semantischen Modellen](https://learn.microsoft.com/power-bi/create-reports/copilot-semantic-models)
-- **Best Practices (Learn):** [Variablen](https://learn.microsoft.com/dax/best-practices/dax-variables) ·
-  [DIVIDE statt /](https://learn.microsoft.com/dax/best-practices/dax-divide-function-operator) ·
-  [FILTER nicht als Filterargument](https://learn.microsoft.com/dax/best-practices/dax-avoid-avoid-filter-as-filter-argument) ·
-  [BLANK nicht umwandeln](https://learn.microsoft.com/dax/best-practices/dax-avoid-converting-blank) ·
-  [Spalten- und Measure-Verweise](https://learn.microsoft.com/dax/best-practices/dax-column-measure-references)
-- **Zeit und DirectQuery (Learn):** [Datumstabellen](https://learn.microsoft.com/power-bi/transform-model/desktop-date-tables) ·
-  [Zeitbezogene Berechnungen](https://learn.microsoft.com/power-bi/transform-model/desktop-time-intelligence) ·
-  [DirectQuery-Modelle](https://learn.microsoft.com/power-bi/guidance/directquery-model-guidance)
-- **SQLBI:** [dax.guide](https://dax.guide/) · [DAX Formatter](https://www.daxformatter.com/) ·
-  [DAX Patterns](https://www.daxpatterns.com/) ·
-  [Row Context and Filter Context](https://www.sqlbi.com/articles/row-context-and-filter-context-in-dax/) ·
-  [Understanding Context Transition](https://www.sqlbi.com/articles/understanding-context-transition/) ·
-  [The definitive guide to ALLSELECTED](https://www.sqlbi.com/articles/the-definitive-guide-to-allselected/)
+- **Microsoft Learn (geprüft am 22.11.2026):** [DAX-Funktionsreferenz](https://learn.microsoft.com/dax/dax-function-reference) · [DAX-Abfragen](https://learn.microsoft.com/dax/dax-queries) · [DAX-Abfrageansicht](https://learn.microsoft.com/power-bi/transform-model/dax-query-view) · [DAX-Abfragen mit Copilot schreiben](https://learn.microsoft.com/dax/dax-copilot) · [Copilot mit semantischen Modellen](https://learn.microsoft.com/power-bi/create-reports/copilot-semantic-models) · [Copilot in Power BI: Voraussetzungen](https://learn.microsoft.com/power-bi/create-reports/copilot-introduction)
+- **Best Practices (Learn):** [Variablen](https://learn.microsoft.com/dax/best-practices/dax-variables) · [DIVIDE statt /](https://learn.microsoft.com/dax/best-practices/dax-divide-function-operator) · [FILTER nicht als Filterargument](https://learn.microsoft.com/dax/best-practices/dax-avoid-avoid-filter-as-filter-argument) · [BLANK nicht umwandeln](https://learn.microsoft.com/dax/best-practices/dax-avoid-converting-blank) · [Spalten- und Measure-Verweise](https://learn.microsoft.com/dax/best-practices/dax-column-measure-references) · [DAX-UDFs](https://learn.microsoft.com/dax/best-practices/dax-user-defined-functions)
+- **Zeit und DirectQuery (Learn):** [Datumstabellen](https://learn.microsoft.com/power-bi/transform-model/desktop-date-tables) · [Zeitbezogene Berechnungen](https://learn.microsoft.com/power-bi/transform-model/desktop-time-intelligence) · [DirectQuery-Modelle](https://learn.microsoft.com/power-bi/guidance/directquery-model-guidance)
+- **SQLBI:** [dax.guide](https://dax.guide/) · [DAX Formatter](https://www.daxformatter.com/) · [DAX Patterns](https://www.daxpatterns.com/) · [Row Context and Filter Context](https://www.sqlbi.com/articles/row-context-and-filter-context-in-dax/) · [Understanding Context Transition](https://www.sqlbi.com/articles/understanding-context-transition/) · [The definitive guide to ALLSELECTED](https://www.sqlbi.com/articles/the-definitive-guide-to-allselected/)

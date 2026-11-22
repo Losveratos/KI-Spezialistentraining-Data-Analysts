@@ -15,9 +15,10 @@ so können Sie Formatierung übernehmen, ohne ungeprüfte Logikänderungen einzu
 - **K02** (DAX-Styleguide) anhängen oder im Notebook hinterlegen.
 - Datenschutz: Code enthält in der Regel keine Daten. Prüfen Sie trotzdem auf hart kodierte Namen, Kostenstellen
   oder Kundennamen in Filtern und anonymisieren Sie diese bei echten Modellen.
-- **Variante Copilot in Power BI:** In der DAX-Abfrageansicht (Strg+I) kann Copilot eine DAX-*Abfrage* erklären,
-  kommentieren und umbauen. Voraussetzung: Desktop ist mit einem Arbeitsbereich auf Fabric-Kapazität (F2+) oder
-  Premium-Kapazität (P1+) bzw. einer Fabric Copilot capacity verbunden, Copilot ist vom Admin freigegeben.
+- **Variante Copilot in Power BI:** In der DAX-Abfrageansicht (Strg+I, Vorschau) kann Copilot eine DAX-*Abfrage* erklären,
+  kommentieren und umbauen. Voraussetzung: Sie haben Schreibzugriff auf einen Arbeitsbereich auf bezahlter Fabric-Kapazität
+  (F2+) oder Premium-Kapazität (P1+) – oder eine Fabric Copilot capacity –, und der Admin hat Copilot nicht abgeschaltet.
+  Testkapazität (Trial) und Premium-Einzelbenutzer (PPU) reichen nicht.
   Dort das Measure als `DEFINE MEASURE … EVALUATE …` einfügen – Copilot arbeitet abfrageorientiert.
 
 ## Prompt
@@ -75,6 +76,6 @@ Tab-Einrückung, DAX-Ausdruck mehrzeilig eingerückt, ohne lineageTag. Behalte f
 - „Nur formatieren“ wird von Copilot gern als Einladung zum Verbessern gelesen. Formatieren und Ändern immer trennen.
 - DAX-Kommentare mit `//` oder `--` funktionieren im Measure; `///` im TMDL ist dagegen die **Beschreibung** des Objekts – nicht verwechseln.
 - Copilot für Measure-Beschreibungen in Desktop ignoriert Kommentare im DAX – die Beschreibung ist ein eigenes Feld (siehe M1-12).
-- Für reines Formatieren ist die Funktion **Abfrage formatieren** der DAX-Abfrageansicht schneller und deterministisch
-  (Measure als `DEFINE MEASURE` einfügen). Copilot lohnt sich vor allem für die Kommentare. Externe Formatierer im Web
+- Für reines Formatieren ist die Schaltfläche **Formatieren** (engl. *Format query*, Umschalt+Alt+F) der DAX-Abfrageansicht
+  schneller und deterministisch (Measure als `DEFINE MEASURE` einfügen). Copilot lohnt sich vor allem für die Kommentare. Externe Formatierer im Web
   nur nutzen, wenn der Code nichts Vertrauliches enthält.

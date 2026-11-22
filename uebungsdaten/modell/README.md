@@ -9,7 +9,8 @@ keine echten Unternehmenszahlen und keine personenbezogenen Daten.
 1. Power BI Desktop (aktuelle Version) starten.
 2. Falls Ihre Desktop-Version das noch verlangt: unter *Datei › Optionen und Einstellungen › Optionen ›
    Vorschaufeatures* die Optionen **„Power BI-Projektdateien (.pbip) speichern“** und
-   **„TMDL-Ansicht“** aktivieren und Desktop neu starten. In neueren Versionen sind beide fest eingebaut.
+   **„TMDL-Ansicht“** aktivieren und Desktop neu starten. In aktuellen Versionen sind beide fest eingebaut (TMDL-Ansicht in
+   Desktop seit September 2025, Power BI-Projekte seit September 2026 allgemein verfügbar).
 3. `DBS_Produktionscontrolling.pbip` öffnen.
 4. Beim ersten Öffnen sind die Tabellen leer. Oben erscheinen zwei gelbe/graue Hinweisleisten: zweimal
    **Jetzt aktualisieren** klicken (erst Beziehungen, dann Daten) – oder **Start › Aktualisieren**. Die Daten

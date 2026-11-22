@@ -53,17 +53,16 @@ DIVIDE ( [Abw Kosten], [Plan Kosten] )
 
 ```dax
 // Ampelstatus je Zeile für die Kennzahlenübersicht.
-// (Setzt voraus, dass m_QQ in Qualitätsquote umbenannt wurde.)
 KPI Status =
 VAR _SchwelleKosten = 0.05      // > 5 % über Plan gilt als Kostenüberschreitung
-VAR _SchwelleQualitaet = 0.90   // < 90 % bestandene Prüfungen gilt als Qualitätsproblem
+VAR _SchwelleKrankenquote = 0.08   // > 8 % Krankenquote gilt als Personalengpass
 VAR _KostenUeberPlan = [Abw Kosten %] > _SchwelleKosten
-VAR _QualitaetKritisch = [Qualitätsquote] < _SchwelleQualitaet
+VAR _KrankenquoteHoch = [Krankenquote] > _SchwelleKrankenquote
 RETURN
     SWITCH (
         TRUE (),
-        _KostenUeberPlan && _QualitaetKritisch, "kritisch",
-        _KostenUeberPlan || _QualitaetKritisch, "beobachten",
+        _KostenUeberPlan && _KrankenquoteHoch, "kritisch",
+        _KostenUeberPlan || _KrankenquoteHoch, "beobachten",
         "im Plan"
     )
 ```

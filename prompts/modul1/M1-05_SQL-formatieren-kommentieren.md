@@ -2,7 +2,7 @@
 
 | Modul | Werkzeug | Übung | Dauer |
 |---|---|---|---|
-| 1 | M365 Copilot Chat oder Notebook (Test in SSMS / Azure Data Studio / VS Code) | Ü1.5 | 12 min |
+| 1 | M365 Copilot Chat oder Notebook (Test in SSMS oder VS Code mit MSSQL-Erweiterung) | Ü1.5 | 12 min |
 
 ## Wofür
 Views und Abfragen, die Power-BI-Berichte speisen – besonders per DirectQuery –, bestimmen Ladezeit und

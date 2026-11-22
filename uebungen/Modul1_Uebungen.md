@@ -22,16 +22,16 @@ Die Lösungen besprechen wir gemeinsam im Training.
 | Ü1.10 | M1.6 | Berichtsseite dokumentieren | M1-11 | 10 min |
 | Ü1.11 | M1.7 | Beschreibungen als TMDL zurückschreiben, `m_QQ` umbenennen | M1-12 | 10 min |
 | Ü1.12 | M1.7 | Modell KI-fähig machen, AI-Instructions entwerfen | M1-13 | 10 min |
-| Z1.1 | Zusatz | Modellhygiene per TMDL umsetzen (F3, F6, F7, F8) | M1-13 | 15 min |
+| Z1.1 | Zusatz | Modellhygiene per TMDL umsetzen (Zeitintelligenz, ID-Spalten, Sortierung, Datumstabelle) | M1-13 | 15 min |
 
 In Block M1.4 bearbeiten Sie **zwei der drei** Übungen Ü1.3–Ü1.5 – die, die Ihrem Arbeitsalltag am nächsten sind.
 
 ## Vor dem Start
 
 - **Copilot-Varianten.** Alle Übungen funktionieren mit **Microsoft 365 Copilot Chat** oder einem **Copilot Notebook**.
-  Copilot in Power BI (DAX-Abfrageansicht, Modellansicht, Prep data for AI) setzt einen Arbeitsbereich auf Fabric-Kapazität
+  Copilot in Power BI (DAX-Abfrageansicht, Modellansicht, Prep data for AI) setzt einen Arbeitsbereich auf bezahlter Fabric-Kapazität
   (F2 oder höher) bzw. Premium-Kapazität (P1 oder höher) oder eine Fabric Copilot capacity und die Freigabe durch den
-  Admin voraus. Wo das bei Ihnen freigeschaltet ist, ist es als Variante angegeben.
+  Admin voraus; Testkapazitäten (Trial) reichen nicht. Wo das bei Ihnen freigeschaltet ist, ist es als Variante angegeben.
 - **Notebook empfohlen.** Legen Sie ein Copilot Notebook „Modul 1“ an und hinterlegen Sie als Referenzen
   K01 (Arbeitsregeln), K02 (DAX-Styleguide), K03 (TMDL-Kurzreferenz), K05 (Kennzahlen-Glossar). Ausnahme: Ü1.2 Schritt 1
   und die Gegenprüfung laufen bewusst in einem **neuen Einzelchat ohne Referenzen**.
@@ -102,8 +102,8 @@ Measures aus Schritt 4 mit Testabfrage, eine Gegenprüfung ohne „nicht vorhand
 3. Prüfen: Ist die Logik unverändert (noch `/`, noch `Fakt_Leistung[Monat]`)? Sind die Verbesserungsvorschläge konkret?
 4. Dasselbe mit `KPI Status Text`. Hält Copilot sich auch bei einem langen Measure an „Logik nicht ändern“?
 
-**Erwartetes Ergebnis:** Formatierte, kommentierte Measures mit unveränderter Logik und eine Vorschlagsliste, die F1, F9
-und F3 benennt.
+**Erwartetes Ergebnis:** Formatierte, kommentierte Measures mit unveränderter Logik und eine Vorschlagsliste, die die Division mit `/`,
+die doppelte Abweichungsrechnung und die Zeitintelligenz in `Kosten YTD` benennt.
 
 ## Ü1.4 · Power Query: SAP-Export formatieren und Schwachstellen finden (12 min, Wahl)
 
@@ -153,9 +153,9 @@ Konstanten, Sonderfälle mit Ergebnis.
 **Ziel:** `KPI Status Text` lesbar und wartbar machen und **beweisen**, dass es gleich rechnet.
 
 **Schritte**
-1. Im selben Chat wie Ü1.6 weiterarbeiten. Prompt **M1-07**, Granularität `Region[Region], Kalender[Monat]`.
-2. Vorher F1 und F9 beheben: `Abw Kosten %` und `Krankenquote` auf `DIVIDE` umstellen, `Abw Kosten %` nutzt `[Abw Kosten]`
-   (Bearbeitungsleiste oder TMDL-Ansicht).
+1. Zuerst die Basis-Measures bereinigen: `Abw Kosten %` und `Krankenquote` auf `DIVIDE` umstellen, `Abw Kosten %` nutzt
+   `[Abw Kosten]` (Bearbeitungsleiste oder TMDL-Ansicht).
+2. Im selben Chat wie Ü1.6 weiterarbeiten. Prompt **M1-07**, Granularität `Region[Region], Kalender[Monat]`.
 3. Copilots Vergleichsabfrage ausführen. Alternativ `INFO_Abfragen.dax`, Abfrage 8 (ab `DEFINE` markieren).
 4. Bei 0 Abweichungen: neue Fassung ins Measure `KPI Status Text` übernehmen. Bei Abweichungen: Nachschärfen.
 5. Optional: Verbesserung „Monate ohne Daten bleiben leer“ einbauen und mit der Vergleichsabfrage zeigen, welche Zeilen sich ändern.
@@ -213,7 +213,7 @@ Bedeutungen gekennzeichnet; Lückenliste.
 4. Prompt **M1-12** mit K03 und K05.
 5. Rückgabe prüfen (nur `///`-Zeilen neu?), in einen neuen TMDL-Tab einfügen, **Anwenden**.
 6. In der Modellansicht zwei Beschreibungen kontrollieren, `INFO_Abfragen.dax` Abfrage 5 erneut ausführen.
-7. *Variante mit Kapazität:* Für ein Measure **Mit Copilot erstellen** nutzen und mit Ihrer Beschreibung vergleichen.
+7. *Variante mit Kapazität:* Für ein Measure **Erstellen mit Copilot** (engl. *Create with Copilot*) nutzen und mit Ihrer Beschreibung vergleichen.
 
 **Erwartetes Ergebnis:** Alle Measures von `Fakt_Leistung` haben eine fachliche Beschreibung; `m_QQ` heißt
 `Qualitätsquote`, Bericht und Measures funktionieren; Synonymliste liegt vor.
@@ -226,7 +226,7 @@ Bedeutungen gekennzeichnet; Lückenliste.
 1. Kontext: TMDL ohne Partitionen (Stand nach Ü1.11) oder Abfragen 1–4 und 6 aus `INFO_Abfragen.dax`, dazu K05.
 2. Prompt **M1-13**. Als typische Fragen z. B.: „Welche Region liegt bei den Kosten am weitesten über Plan?“,
    „Wie hat sich die Krankenquote in Ost seit Juli entwickelt?“, „Welche Maßnahmen sind verzögert?“
-3. Review-Tabelle mit F1–F9 abgleichen. Was ist erledigt, was offen?
+3. Review-Tabelle mit Ihrer Schwachstellenliste aus Ü1.1 abgleichen. Was ist erledigt, was offen?
 4. AI-Instructions kürzen und als `AI-Instructions_DBS.txt` speichern.
 5. *Variante mit Kapazität:* **Prep data for AI** öffnen (Q&A muss aktiviert sein), Instructions einfügen, AI data schema
    setzen, Copilot-Bereich neu öffnen, zwei Testfragen stellen.
@@ -236,7 +236,8 @@ Bedeutungen gekennzeichnet; Lückenliste.
 
 ## Z1.1 · Zusatz: Modellhygiene per TMDL umsetzen (15 min)
 
-**Ziel:** Die Befunde F3, F6, F7, F8 im Modell beheben – Copilot liefert das Skript, Sie prüfen und wenden an.
+**Ziel:** Vier Befunde im Modell beheben (Zeitintelligenz auf der Faktspalte, summierte ID-Spalten, fehlende Sortierspalte,
+Kalender nicht als Datumstabelle markiert) – Copilot liefert das Skript, Sie prüfen und wenden an.
 
 **Schritte**
 1. PBIP-Ordner sichern.
@@ -246,5 +247,5 @@ Bedeutungen gekennzeichnet; Lückenliste.
 4. Skript prüfen, anwenden. Kalender per **Tabellentools › Als Datumstabelle markieren** (Spalte `Datum`) markieren.
 5. `INFO_Abfragen.dax`, Abfragen 6 und 7 ausführen.
 
-**Erwartetes Ergebnis:** Abfrage 6 meldet keine F3-, F7-, F8-Verdachtsfälle mehr und bei F6 nur noch die Schlüssel
+**Erwartetes Ergebnis:** Abfrage 6 meldet keine Verdachtsfälle zu Zeitintelligenz, Sortierung und Datumstabelle mehr und bei den ID-Spalten nur noch die Schlüssel
 `Region[RegionID]` und `Leistungsart[LeistungsartID]`; Abfrage 7 zeigt `Kosten YTD` kumuliert.

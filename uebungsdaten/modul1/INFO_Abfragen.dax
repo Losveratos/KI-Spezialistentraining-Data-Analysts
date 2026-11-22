@@ -105,11 +105,11 @@ UNION (
 ORDER BY [Objektart], [Tabelle], [Name]
 
 
-// Abfrage 6 – Hinweisliste Modellhygiene (Schwächen F1, F3, F6, F7, F8)
+// Abfrage 6 – Hinweisliste Modellhygiene (typische Schwächen im Modell)
 // Jede Zeile ist ein Verdacht, kein Urteil.
 EVALUATE
 UNION (
-    // F6: sichtbare ID-Spalten, die summiert werden
+    // sichtbare ID-Spalten, die summiert werden
     SELECTCOLUMNS (
         FILTER (
             INFO.VIEW.COLUMNS (),
@@ -120,7 +120,7 @@ UNION (
         "Objekt", [Table] & "[" & [Name] & "]",
         "Detail", "SummarizeBy = " & [SummarizeBy] & ", ausgeblendet = " & [IsHidden]
     ),
-    // F7: Monatsnamen ohne Sortierspalte
+    // Monatsnamen ohne Sortierspalte
     SELECTCOLUMNS (
         FILTER (
             INFO.VIEW.COLUMNS (),
@@ -130,7 +130,7 @@ UNION (
         "Objekt", [Table] & "[" & [Name] & "]",
         "Detail", "Monate werden alphabetisch sortiert"
     ),
-    // F8: keine Tabelle als Datumstabelle markiert
+    // keine Tabelle als Datumstabelle markiert
     FILTER (
         ROW (
             "Verdacht", "Keine Datumstabelle markiert",
@@ -140,14 +140,14 @@ UNION (
         ),
         COUNTROWS ( FILTER ( INFO.VIEW.TABLES (), [DataCategory] = "Time" ) ) + 0 = 0
     ),
-    // F1: Division mit "/" statt DIVIDE (grobe Textsuche, findet auch "/" in Kommentaren)
+    // Division mit "/" statt DIVIDE (grobe Textsuche, findet auch "/" in Kommentaren)
     SELECTCOLUMNS (
         FILTER ( INFO.VIEW.MEASURES (), CONTAINSSTRING ( [Expression], "/" ) ),
         "Verdacht", "Division mit / statt DIVIDE",
         "Objekt", "[" & [Name] & "]",
         "Detail", [Expression]
     ),
-    // F3: Zeitintelligenz auf einer Spalte der Faktentabelle
+    // Zeitintelligenz auf einer Spalte der Faktentabelle
     SELECTCOLUMNS (
         FILTER (
             INFO.VIEW.MEASURES (),
@@ -163,7 +163,7 @@ UNION (
 )
 
 
-// Abfrage 7 – Kosten YTD: bisherige Fassung (Fakt_Leistung[Monat], F3)
+// Abfrage 7 – Kosten YTD: bisherige Fassung (Fakt_Leistung[Monat])
 //              gegen korrigierte Fassung (Kalender[Datum]) für 2026
 DEFINE
     MEASURE Fakt_Leistung[Kosten YTD neu] =

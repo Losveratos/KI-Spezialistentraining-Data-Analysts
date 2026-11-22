@@ -75,7 +75,8 @@ der Storage-Engine-Abfragen, die du erwartest. Schreib dazu, wie ich das mit der
 - [ ] Textvergleich mit `EXACT`: `"Kritisch" = "kritisch"` ist in DAX wahr.
 - [ ] Neue Fassung erst danach im Modell ersetzen: Code in die Bearbeitungsleiste des Original-Measures kopieren,
       oder in der DAX-Abfrageansicht im `DEFINE MEASURE` den Namen auf das Original setzen und die CodeLens
-      **Modell aktualisieren** über der Zeile nutzen (überschreibt das Measure). Danach Berichtsseite stichprobenartig ansehen.
+      **Modell aktualisieren: Measure überschreiben** (engl. *Update model: Overwrite measure*) über der Zeile nutzen.
+      Danach Berichtsseite stichprobenartig ansehen.
 
 ## Stolperfallen
 - Wiederverwendung kann das Verhalten ändern: Wird `[Abw Kosten %]` vorher auf `DIVIDE` umgestellt, liefert es bei
