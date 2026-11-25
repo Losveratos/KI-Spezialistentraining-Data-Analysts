@@ -138,6 +138,11 @@ Vollständig: [L05 Checkliste Berichtsveröffentlichung](leitfaeden/L05_Checklis
 | einen Kommentar entwerfen | [M2-04](prompts/modul2/M2-04_Kommentar-Kennzahlenuebersicht.md) · [M2-05](prompts/modul2/M2-05_Kommentar-Detailbericht.md) |
 | Korrelationen finden und bewerten | [M2-06](prompts/modul2/M2-06_Korrelationen-finden.md) · [M2-07](prompts/modul2/M2-07_Korrelationen-bewerten.md) |
 | Maßnahmen prüfen und kommentieren | [M2-08](prompts/modul2/M2-08_Massnahmentracking-Konsistenzcheck.md) · [M2-09](prompts/modul2/M2-09_Massnahmen-Statuskommentar-und-Wirkung.md) |
+| das richtige Copilot-Werkzeug wählen, ein Notizbuch einrichten | [M3-01](prompts/modul3/M3-01_Chat-Notizbuch-oder-Agent.md) · [M3-02](prompts/modul3/M3-02_Notizbuch-fuer-Datenanalyse-einrichten.md) |
+| mit Researcher recherchieren, mit Analyst rechnen | [M3-03](prompts/modul3/M3-03_Researcher-Recherche-mit-Quellen.md) · [M3-04](prompts/modul3/M3-04_Analyst-Datenanalyse-nachvollziehbar.md) |
+| in Excel analysieren und gegen Regeln prüfen | [M3-05](prompts/modul3/M3-05_Excel-strukturierte-Analyse.md) · [M3-06](prompts/modul3/M3-06_Excel-Validierung-Regelkatalog.md) · [M3-07](prompts/modul3/M3-07_Excel-Pruefspalten-und-Formeln.md) |
+| einen Bericht oder Foliensatz gegen seine Quelle prüfen | [M3-08](prompts/modul3/M3-08_Office-Dateien-gegeneinander-pruefen.md) |
+| aus Excel-Daten Folien machen und prüfen | [M3-09](prompts/modul3/M3-09_Excel-zu-PowerPoint.md) · [M3-10](prompts/modul3/M3-10_PowerPoint-pruefen-und-nachschaerfen.md) |
 
 ---
 
