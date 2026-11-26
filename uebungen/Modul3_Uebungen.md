@@ -20,6 +20,7 @@ Alle Übungen arbeiten mit den Dateien in `uebungsdaten/modul3/` (Beschreibung d
 | Ü3.4 | Excel: Validierung gegen einen Regelkatalog | M3-06, M3-07 | `Leistungsnachweise_Export_Okt-2026.xlsx` | 18 min |
 | Ü3.5 | Office-Dateien gegeneinander prüfen | M3-08 | `Monatsbericht_Okt-2026_Entwurf.pptx`, `Kennzahlen_Okt-2026.xlsx` | 12 min |
 | Ü3.6 | Von Excel zu PowerPoint | M3-09, M3-10 | `Kennzahlen_Okt-2026.xlsx` | 12 min |
+| Zusatz | [Excel mit Copilot – acht Übungsfälle](Modul3_Excel-Faelle.md) (Formeln, Formatieren, SVERWEIS, Kreuztabelle …) | M3-05, M3-07 | `Excel-Copilot_Uebungsfaelle.xlsx` | je 8–12 min |
 
 ---
 

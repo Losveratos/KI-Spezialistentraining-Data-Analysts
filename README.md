@@ -27,7 +27,7 @@ auf Ihre eigenen Modelle und Berichte übertragen können.
 | [uebungsdaten/modul1/](uebungsdaten/modul1/) | Code-Beispiele für die Übungen (Power Query, SQL, Fehlerfälle, DAX-Abfragen) |
 | [uebungsdaten/excel-chaos/](uebungsdaten/excel-chaos/README.md) | Fünf typische „gewachsene“ Excel- und CSV-Dateien, aus denen Copilot Power-Query-Abfragen bauen soll – mit Zielschema und Kontrollwerten |
 | [uebungsdaten/modul2/](uebungsdaten/modul2/) | KPI-Exporte (Excel, CSV) für die Analyseübungen |
-| [uebungsdaten/modul3/](uebungsdaten/modul3/README.md) | Kennzahlenexport, Leistungsnachweise mit Regelkatalog und ein Präsentationsentwurf zum Prüfen |
+| [uebungsdaten/modul3/](uebungsdaten/modul3/README.md) | Kennzahlenexport, Leistungsnachweise mit Regelkatalog, ein Präsentationsentwurf zum Prüfen und eine Arbeitsmappe mit [acht Excel-Fällen](uebungen/Modul3_Excel-Faelle.md) |
 | [videos/](videos/README.md) | Geprüfte YouTube-Links zum Vertiefen |
 
 ## So nutzen Sie die Prompt-Dateien

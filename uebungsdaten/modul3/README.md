@@ -1,6 +1,6 @@
 # Übungsdateien Modul 3 – Copilot und Office
 
-Drei Dateien für die Übungen Ü3.1–Ü3.6. Alle Daten sind **fiktiv** und passen zum Übungsmodell aus Termin 1
+Vier Dateien: drei für die Übungen Ü3.1–Ü3.6 und eine Arbeitsmappe mit acht Excel-Fällen. Alle Daten sind **fiktiv** und passen zum Übungsmodell aus Termin 1
 (gleiche Regionen, Leistungsarten, Berichtsmonat Oktober 2026).
 
 | Datei | Wofür | Übung |
@@ -8,6 +8,7 @@ Drei Dateien für die Übungen Ü3.1–Ü3.6. Alle Daten sind **fiktiv** und pas
 | `Kennzahlen_Okt-2026.xlsx` | bereinigter Kennzahlenexport – Quelle für Analyse, Prüfung und Präsentation | Ü3.1, Ü3.2, Ü3.3, Ü3.5, Ü3.6 |
 | `Leistungsnachweise_Export_Okt-2026.xlsx` | Export mit Belegen, der gegen einen Regelkatalog geprüft wird | Ü3.4 |
 | `Monatsbericht_Okt-2026_Entwurf.pptx` | Präsentationsentwurf, der gegen die Kennzahlen geprüft wird | Ü3.5 |
+| `Excel-Copilot_Uebungsfaelle.xlsx` | acht Übungsfälle für Copilot in Excel, je Blatt mit Aufgaben, Beispiel-Prompts und Kontrollwerten | [Excel-Fälle](../../uebungen/Modul3_Excel-Faelle.md) |
 
 Für Copilot **in** Excel bzw. PowerPoint legen Sie die Dateien in OneDrive oder SharePoint ab (AutoSpeichern an).
 Für den Copilot-Chat können Sie sie anhängen.
